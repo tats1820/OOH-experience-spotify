@@ -3,13 +3,13 @@ console.log('Server IP: ', NGROK);
 let socket = io(NGROK, { path: '/real-time' });
 
 let controllerX, controllerY = 0;
-let interactions = 2;
+let interactions = 1;
 let isTouched = false;
 
 function setup() {
     frameRate(60);
     canvas = createCanvas(windowWidth, windowHeight);
-    canvas.style('z-index', '-1');
+    //canvas.style('z-index', '-1');
     canvas.style('position', 'fixed');
     canvas.style('top', '0');
     canvas.style('right', '0');
@@ -62,9 +62,11 @@ function deviceMoved() {
             background(0, 255, 255);
             break;
         case 2:
-            socket.emit('mobile-instructions', { interactions, rotationX, rotationY, rotationZ });
+            socket.emit('mobile-instructions', { interactions, rotationX, rotationY});
             background(0, 255, 0);
             break;
+
+        case 3:
     }
     
 }

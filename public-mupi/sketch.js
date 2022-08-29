@@ -52,14 +52,14 @@ socket.on('mupi-instructions', instructions => {
             let { pmouseX, pmouseY } = instructions;
             controllerX = (pmouseX * mupiWidth) / deviceWidth;
             controllerY = (pmouseY * mupiHeight) / deviceHeight;
-            console.log({ controllerX, controllerY });
+            console.log({ controllerX, controllerY});
             break;
         case 1:
             let { pAccelerationX, pAccelerationY, pAccelerationZ } = instructions;
             ballSize = pAccelerationY < 0 ? pAccelerationY * -2 : pAccelerationY * 2;
             break;
         case 2:
-            let { rotationX, rotationY, rotationZ } = instructions;
+            let { rotationX, rotationY} = instructions;
             controllerY = (rotationX * mupiHeight) / 90;
             controllerX = (rotationY * mupiWidth) / 90;
             break;
