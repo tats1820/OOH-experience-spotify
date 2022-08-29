@@ -63,6 +63,9 @@ function deviceMoved() {
             break;
         case 2:
             socket.emit('mobile-instructions', { interactions, rotationX, rotationY});
+            if (pmouseX > windowWidth || pmouseX < 0){
+                rotationX *= -1;
+            }
             background(0, 255, 0);
             break;
 
