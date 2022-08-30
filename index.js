@@ -18,6 +18,9 @@ const httpServer = app.listen(PORT, () => { //websocket
 // Run on terminal: ngrok http 5050;
 
 const io = new Server(httpServer, { path: '/real-time' });
+let validated = true;//validar de que este centrado
+let selectedRight = false;
+let selectedLeft = false;
 
 io.on('connection', socket => {// para concetar
     console.log(socket.id);
@@ -27,7 +30,23 @@ io.on('connection', socket => {// para concetar
     });
 
     socket.on('mobile-instructions', instructions => {
-        console.log(instructions);
+        console.log(instructions, validated);
+        if (instructions.rotationY < -10 && validated) {
+            socket.broadcast.emit('accion 1'); //izquierda
+            console.log('izquierda');
+            validated = false;
+            selectedLeft = true;
+        } else if (instructions.rotationY > -10 && instructions.rotationY < 10){
+            validated = true;
+            if (selectedLeft || selectedRight){
+                socket.broadcast.emit('next question');
+            }
+        } else if (instructions.rotationY > 10 && validated){
+            socket.broadcast.emit('accion 2'); // derecha
+            validated = false;
+            selectedRight = true;
+        }
+
         socket.broadcast.emit('mupi-instructions', instructions);
     })
 });

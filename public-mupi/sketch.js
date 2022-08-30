@@ -65,7 +65,6 @@ socket.on('mupi-instructions', instructions => {
             break;
     }
 
-
 });
 
 socket.on('mupi-size', deviceSize => {
@@ -73,4 +72,14 @@ socket.on('mupi-size', deviceSize => {
     deviceWidth = windowWidth;
     deviceHeight = windowHeight;
     console.log(`User is using a smartphone size of ${deviceWidth} and ${deviceHeight}`);
+});
+
+socket.on('accion 1', action => {
+    ballSize += 20;
+    alert('izquierda')
+});
+
+socket.on('accion 2', action => {
+    ballSize -= 20;
+    alert('derecha')
 });
