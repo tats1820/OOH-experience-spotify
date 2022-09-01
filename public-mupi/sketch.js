@@ -11,6 +11,7 @@ let deviceWidth,
 let mupiWidth,
   mupiHeight = 0;
 let ballSize = 20;
+let 
 
 function preload() {
   img1 = loadImage("mupiimages/muppi2.png");
@@ -93,9 +94,11 @@ socket.on("mupi-size", (deviceSize) => {
 socket.on("accion 1", (action) => {
   ballSize += 20;
   alert("izquierda");
+  points += 5;
 });
 
 socket.on("accion 2", (action) => {
   ballSize -= 20;
   alert("derecha");
+  points += 10;
 });
