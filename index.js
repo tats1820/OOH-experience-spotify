@@ -1,7 +1,7 @@
 const express = require('express');
 const { Server } = require('socket.io');
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = '172.30.71.152'; // Cambiar por la IP del computador
+const SERVER_IP = '192.168.0.14'; // Cambiar por la IP del computador
 
 //const os = require('os');
 //const IPaddress = os.networkInterfaces().en0[1].address;
@@ -22,6 +22,12 @@ let validated = true;//validar de que este centrado
 let selectedRight = false;
 let selectedLeft = false;
 
+//Variables para las preguntas 
+let total = 7;
+let puntaje = 0;
+
+let respuestas = ["left", "right"];
+
 io.on('connection', socket => {// para concetar
     console.log(socket.id);
 
@@ -30,18 +36,21 @@ io.on('connection', socket => {// para concetar
     });
 
     socket.on('mobile-instructions', instructions => {
-        console.log(instructions, validated);
-        if (instructions.rotationY < -10 && validated) {
+        //console.log(instructions, validated);
+        if (instructions.rotationY < -30 && validated) {
             socket.broadcast.emit('accion 1'); //izquierda
             console.log('izquierda');
             validated = false;
             selectedLeft = true;
-        } else if (instructions.rotationY > -10 && instructions.rotationY < 10){
+        } else if (instructions.rotationY > -30 && instructions.rotationY < 30){
             validated = true;
             if (selectedLeft || selectedRight){
                 socket.broadcast.emit('next question');
-            }
-        } else if (instructions.rotationY > 10 && validated){
+                console.log('siguiente pregunta')
+                selectedLeft = false;
+                selectedRight = false;
+            } 
+        } else if (instructions.rotationY > 30 && validated){
             socket.broadcast.emit('accion 2'); // derecha
             validated = false;
             selectedRight = true;
