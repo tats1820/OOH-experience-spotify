@@ -118,6 +118,12 @@ const postData = async (url = "", data = {}) => {
   return data;
 };
 
+function startGameAction() {
+  screen = 1;
+  startGameButton.hide();
+  console.log("a");
+}
+
 function setup() {
   screen = 8;
   frameRate(60);
