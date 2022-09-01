@@ -2,15 +2,14 @@ const NGROK = `https://${window.location.hostname}`;
 let socket = io(NGROK, { path: "/real-time" });
 console.log("Server IP: ", NGROK);
 
+let img1;
+
 let controllerX,
   controllerY = 0;
 let deviceWidth,
   deviceHeight = 0;
 let mupiWidth,
   mupiHeight = 0;
-
-let img1;
-
 let ballSize = 20;
 
 function preload() {
@@ -29,13 +28,6 @@ function setup() {
   mupiWidth = windowWidth;
   mupiHeight = windowHeight;
   background(0);
-}
-
-function draw() {
-  background(0, 5);
-  newCursor(pmouseX, pmouseY);
-  fill(255);
-  ellipse(controllerX, controllerY, ballSize, ballSize);
 
   imageMode("center");
   image(img1, windowWidth / 2, windowHeight / 2, 550, 800);
@@ -61,9 +53,9 @@ function windowResized() {
 }
 
 function newCursor(x, y) {
-  noStroke();
-  fill(255);
-  ellipse(x, y, 10, 10);
+  /*  noStroke();
+    fill(255);
+    ellipse(x, y, 10, 10);*/
 }
 
 socket.on("mupi-instructions", (instructions) => {
