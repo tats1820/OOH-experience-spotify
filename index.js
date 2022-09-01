@@ -1,6 +1,7 @@
 const express = require("express");
 const { Server } = require("socket.io");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
+
 const SERVER_IP = "172.30.71.152"; // Cambiar por la IP del computador
 
 //const os = require('os');
@@ -23,6 +24,13 @@ let validated = true; //validar de que este centrado
 let selectedRight = false;
 let selectedLeft = false;
 //pooner los eventos que necesitamos
+
+//Variables para las preguntas
+let total = 7;
+let puntaje = 0;
+
+let respuestas = ["left", "right"];
+//poner los veentos que necesitamos
 io.on("connection", (socket) => {
   // para concetar
   console.log(socket.id);
@@ -52,7 +60,32 @@ io.on("connection", (socket) => {
 
     socket.broadcast.emit("mupi-instructions", instructions);
   });
+
+  socket.on("mobile-instructions", (instructions) => {
+    //console.log(instructions, validated);
+    if (instructions.rotationY < -30 && validated) {
+      socket.broadcast.emit("accion 1"); //izquierda
+      console.log("izquierda");
+      validated = false;
+      selectedLeft = true;
+    } else if (instructions.rotationY > -30 && instructions.rotationY < 30) {
+      validated = true;
+      if (selectedLeft || selectedRight) {
+        socket.broadcast.emit("next question");
+        console.log("siguiente pregunta");
+        selectedLeft = false;
+        selectedRight = false;
+      }
+    } else if (instructions.rotationY > 30 && validated) {
+      socket.broadcast.emit("accion 2"); // derecha
+      validated = false;
+      selectedRight = true;
+    }
+
+    socket.broadcast.emit("mupi-instructions", instructions);
+  });
 });
+
 /*
 async function posData(url = "", data = {}) {
   const response = await fetch(url, {
@@ -67,4 +100,5 @@ async function posData(url = "", data = {}) {
 }
 postData("http://localhost:5050/app", { mensaje: "Hola" }).then((data) => {
   console.log(data);
-});*/
+});
+*/

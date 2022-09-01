@@ -8,7 +8,14 @@ let deviceWidth,
   deviceHeight = 0;
 let mupiWidth,
   mupiHeight = 0;
+
+let img1;
+
 let ballSize = 20;
+
+function preload() {
+  img1 = loadImage("mupiimages/muppi2.png");
+}
 
 function setup() {
   frameRate(60);
@@ -29,6 +36,20 @@ function draw() {
   newCursor(pmouseX, pmouseY);
   fill(255);
   ellipse(controllerX, controllerY, ballSize, ballSize);
+
+  imageMode("center");
+  image(img1, windowWidth / 2, windowHeight / 2, 550, 800);
+  console.log(img1, img1.width / 2, img1.height / 2);
+}
+
+function draw() {
+  /*background(0, 5);
+    newCursor(pmouseX, pmouseY);
+    fill(255);
+    ellipse(controllerX, controllerY, ballSize, ballSize);
+    */
+
+  newCursor(pmouseX, pmouseY);
 }
 
 function mouseDragged() {
