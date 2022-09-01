@@ -12,7 +12,7 @@ let img1;
 let img2;
 
 //Pantalla inicio
-let screen = 7;
+let screen = 0;
 let startGameButton;
 
 //Fuente
@@ -84,7 +84,7 @@ const questions = [
 function preload() {
   img1 = loadImage("appimages/Tutorial1.png");
   img2 = loadImage("appimages/Tutorial2.png");
-  arialFontBold = loadFont("appimages/ArialBold.ttf")
+  arialFontBold = loadFont("appimages/ArialBold.ttf");
 }
 
 const postData = async (url = "", data = {}) => {
@@ -102,6 +102,7 @@ const postData = async (url = "", data = {}) => {
 function startGameAction() {
   screen = 1;
   startGameButton.hide();
+  console.log("a");
 }
 
 function setup() {
