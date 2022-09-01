@@ -10,7 +10,6 @@ let deviceWidth,
   deviceHeight = 0;
 let mupiWidth,
   mupiHeight = 0;
-let ballSize = 20;
 
 function preload() {
   img1 = loadImage("mupiimages/muppi2.png");

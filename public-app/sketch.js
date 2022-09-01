@@ -12,7 +12,7 @@ let img1;
 let img2;
 
 //Pantalla inicio
-let screen = 7;
+let screen = 0;
 let startGameButton;
 
 //Fuente
