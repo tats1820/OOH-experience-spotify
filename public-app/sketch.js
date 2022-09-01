@@ -124,6 +124,7 @@ function setup() {
     DeviceOrientationEvent.requestPermission();
     screen = 1;
     btn.hide();
+    console.log("a");
   });
 
   /*

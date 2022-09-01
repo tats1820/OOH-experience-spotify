@@ -25,7 +25,6 @@ let deviceWidth,
   deviceHeight = 0;
 let mupiWidth,
   mupiHeight = 0;
-let ballSize = 20;
 
 
 
