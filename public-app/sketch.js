@@ -12,32 +12,35 @@ let img1;
 let img2;
 
 //Pantalla inicio
-let screen = 0;
+let screen = 7;
 let startGameButton;
+
+//Fuente
+let arialFontBold;
 
 const questions = [
   //Pregunta 1
   {
     question: "Te gusta comer",
     choices: {
-      a: "dulce",
-      b: "salado",
+      a: "Dulce",
+      b: "Salado",
     },
   },
   //Pregunta 2
   {
     question: "¿Qué te gusta?",
     choices: {
-      a: "noche",
-      b: "dia",
+      a: "Noche",
+      b: "Dia",
     },
   },
   //Pregunta 3
   {
     question: "¿Qué prefieres?",
     choices: {
-      a: "calor",
-      b: "frio",
+      a: "Calor",
+      b: "Frio",
     },
   },
 
@@ -45,8 +48,8 @@ const questions = [
   {
     question: "Si fueras un animal",
     choices: {
-      a: "gato",
-      b: "perro",
+      a: "Gato",
+      b: "Perro",
     },
   },
 
@@ -54,8 +57,8 @@ const questions = [
   {
     question: "Te gusta más",
     choices: {
-      a: "montaña",
-      b: "playa",
+      a: "Montaña",
+      b: "Playa",
     },
   },
 
@@ -63,8 +66,8 @@ const questions = [
   {
     question: "Te gusta escuchar",
     choices: {
-      a: "pop",
-      b: "rock",
+      a: "Pop",
+      b: "Rock",
     },
   },
 
@@ -72,8 +75,8 @@ const questions = [
   {
     question: "Te gusta más",
     choices: {
-      a: "frutas",
-      b: "verduras",
+      a: "Frutas",
+      b: "Verduras",
     },
   },
 ];
@@ -81,7 +84,9 @@ const questions = [
 function preload() {
   img1 = loadImage("appimages/Tutorial1.png");
   img2 = loadImage("appimages/Tutorial2.png");
+  arialFontBold = loadFont("appimages/ArialBold.ttf")
 }
+
 const postData = async (url = "", data = {}) => {
   const response = await fetch(url, {
     method: "POST",
@@ -98,6 +103,7 @@ function startGameAction() {
   screen = 1;
   startGameButton.hide();
 }
+
 function setup() {
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
@@ -158,23 +164,81 @@ function draw() {
       textAlign(CENTER, CENTER);
       fill(255, 255, 255);
       textSize(24);
+      textFont(arialFontBold);
       text(questions[0].choices.a, windowWidth / 4, windowHeight / 2);
       text(questions[0].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
       break;
 
     case 3:
       background(255, 255, 255);
-      fill(255, 255, 255);
+      fill(9, 101, 79);
       rect(0, 0, windowWidth / 2, windowHeight);
       fill(82, 40, 75);
       rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
       textAlign(CENTER, CENTER);
       fill(255, 255, 255);
       textSize(24);
+      textFont(arialFontBold);
       text(questions[1].choices.a, windowWidth / 4, windowHeight / 2);
       text(questions[1].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
       break;
 
+    case 4:
+      background(255, 255, 255);
+      fill(36, 51, 82);
+      rect(0, 0, windowWidth / 2, windowHeight);
+      fill(156, 43, 123);
+      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
+      textAlign(CENTER, CENTER);
+      fill(255, 255, 255);
+      textSize(24);
+      textFont(arialFontBold);
+      text(questions[2].choices.a, windowWidth / 4, windowHeight / 2);
+      text(questions[2].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      break;
+
+    case 5:
+      background(255, 255, 255);
+      fill(196, 202, 98);
+      rect(0, 0, windowWidth / 2, windowHeight);
+      fill(0, 32, 64);
+      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
+      textAlign(CENTER, CENTER);
+      fill(255, 255, 255);
+      textSize(24);
+      textFont(arialFontBold);
+      text(questions[3].choices.a, windowWidth / 4, windowHeight / 2);
+      text(questions[3].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      break;
+
+    case 6:
+      background(255, 255, 255);
+      fill(156, 43, 123);
+      rect(0, 0, windowWidth / 2, windowHeight);
+      fill(255, 188, 75);
+      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
+      textAlign(CENTER, CENTER);
+      fill(255, 255, 255);
+      textSize(24);
+      textFont(arialFontBold);
+      text(questions[4].choices.a, windowWidth / 4, windowHeight / 2);
+      text(questions[4].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      break;
+
+    case 7:
+      background(255, 255, 255);
+      fill(81, 155, 244);
+      rect(0, 0, windowWidth / 2, windowHeight);
+      fill(35, 51, 103);
+      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
+      textAlign(CENTER, CENTER);
+      fill(255, 255, 255);
+      textSize(24);
+      textFont(arialFontBold);
+      text(questions[5].choices.a, windowWidth / 4, windowHeight / 2);
+      text(questions[5].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      break;
+      
     default:
       background(255, 0, 0);
       break;
