@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("mupi-instructions", instructions);
   });
 });
-
+/*
 async function posData(url = "", data = {}) {
   const response = await fetch(url, {
     method: "POST",
@@ -67,4 +67,4 @@ async function posData(url = "", data = {}) {
 }
 postData("http://localhost:5050/app", { mensaje: "Hola" }).then((data) => {
   console.log(data);
-});
+});*/

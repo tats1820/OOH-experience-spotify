@@ -2,11 +2,17 @@ const NGROK = `https://${window.location.hostname}`;
 console.log("Server IP: ", NGROK);
 let socket = io(NGROK, { path: "/real-time" });
 
+let screen;
+let startGame;
+
 let controllerX,
   controllerY = 0;
 const interactions = 2;
 let isTouched = false;
-
+function startButtonAction() {
+  screen = 1;
+  startGame.hide();
+}
 function setup() {
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
