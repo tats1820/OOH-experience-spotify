@@ -3,7 +3,7 @@ let socket = io(NGROK, { path: "/real-time" });
 console.log("Server IP: ", NGROK);
 
 //Pantalla
-let screen = 1;
+let screen = 0;
 
 //Imágenes
 let img1;
