@@ -87,7 +87,7 @@ function draw() {
       textSize(70);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('Can you remember this song?', windowWidth/2, windowHeight/5);
+      text('Descubre la canción de tu vida aqui', windowWidth/2, windowHeight/5);
       break;
 
     case 1:
