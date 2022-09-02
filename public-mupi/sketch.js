@@ -33,7 +33,7 @@ let mupiWidth,
 function preload() {
   //Mupi
   img10 = loadImage("mupiimages/Fondomupi1.png");
-  img11 = loadImage("mupiimages/chicamupi.png.png");
+  img11 = loadImage("mupiimages/chicamupi.png");
   img1 = loadImage("mupiimages/muppi2.png");
 
   //Tutorial
@@ -90,10 +90,11 @@ function draw() {
 
     case 1:
       image(img8, 0, 0, windowWidth, windowHeight);
-      image(img9, 460, 100, 950, 800);
+      image(img9, 400, 200, 700, 450);
       fill(255, 255, 255);
       textSize(60);
       textFont(arialFontBold);
+      textAlign(CENTER);
       text('Oprime el lado de la respuesta', windowWidth/2, windowHeight/6);
       break;
 
