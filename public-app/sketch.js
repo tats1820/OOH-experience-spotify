@@ -39,8 +39,14 @@ function instructionsButtonAction() {
   instructionsButton.hide();
 }
 function saveUserData() {
-  saveUserdataButton.hide();
+  screen = 9;
+  saveUserDataButton.hide();
+  startGameButton.hide();
+  instructionsButton.hide();
+  background(100);
+  text("send a post request", 20, 40);
 }
+
 //Fuente
 let arialFontBold;
 

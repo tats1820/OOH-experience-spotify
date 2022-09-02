@@ -12,7 +12,7 @@ const e = require("express");
 //creo la app
 const app = express();
 app.use(express.json());
-//permite 
+//permite
 app.use("/app", express.static("public-app"));
 app.use("/mupi", express.static("public-mupi"));
 //app.use(bodyParser.urlencoded({extended:false}))
