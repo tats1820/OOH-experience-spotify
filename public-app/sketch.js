@@ -202,7 +202,7 @@ function setup() {
   saveUserDataButton.addClass("btn");
   saveUserDataButton.center();
   saveUserDataButton.mousePressed(saveUserData);
-
+  saveUserDataButton.style("display", "none");
   inputNickname = createInput("", "text");
   inputNickname.position(windowWidth / 4, windowHeight / 4);
   inputNickname.input(onInputNickname);
@@ -216,7 +216,7 @@ function setup() {
   inputAge = createInput("", "text");
   inputAge.position(windowWidth / 4, windowHeight / 4 + 100);
   inputAge.input(onInputAge);
-  inputAge.style("display", "none");
+  //inputAge.style("display", "none");
 
   /*
   startGameButton.mousePressed(function () {
@@ -357,10 +357,11 @@ function draw() {
       inputNickname.style("display", "block");
       inputGmail.style("display", "block");
       inputAge.style("display", "block");
+      saveUserDataButton.style("display", "block");
       break;
 
     default:
-      background(255, 0, 0);
+      background(29, 185, 84);
       break;
   }
 }
