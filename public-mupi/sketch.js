@@ -35,6 +35,7 @@ function preload() {
   img10 = loadImage("mupiimages/Fondomupi1.png");
   img11 = loadImage("mupiimages/chicamupi.png");
   img1 = loadImage("mupiimages/muppi2.png");
+  img13 = loadImage("mupiimages/qr-code.png");
 
   //Tutorial
   img8 = loadImage("mupiimages/Tutorialmupi1.png")
@@ -83,6 +84,7 @@ function draw() {
     case 0:
       image(img10, 0, 0, windowWidth, windowHeight);
       image(img11, windowWidth/3, windowHeight/13, windowWidth/3, windowHeight);
+      image(img13, windowWidth/2.3, windowHeight/2, 200, 200)
       fill(255, 255, 255);
       textSize(70);
       textFont(arialFontBold);
