@@ -4,7 +4,6 @@ console.log("Server IP: ", NGROK);
 
 //Pantalla
 let screen = 0;
-
 //Imágenes
 let img1;
 let img2; //Pantalla 1
@@ -75,8 +74,7 @@ function draw() {
 
   switch (screen) {
     case 0:
-      imageMode("center");
-      image(img1, windowWidth / 2, windowHeight / 2, 550, 800);
+      image(img1, 650, 100, 550, 800);
       break;
 
     case 1:
@@ -204,4 +202,12 @@ socket.on("accion 2", (action) => {
   ballSize -= 20;
   alert("derecha");
   points += 10;
+});
+
+socket.on("listsongs", (listSongs) => {
+  console.log(listSongs);
+});
+
+socket.on("nextMupiScreen", (s) => {
+  screen = s;
 });

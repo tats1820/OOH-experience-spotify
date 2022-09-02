@@ -16,14 +16,21 @@ let screen;
 let startGameButton;
 let instructionsButton;
 let saveUserdataButton;
-let points = [];
+let userData = [];
 let input;
 
 //botón para empezar
 function startGameButtonAction() {
-  screen = 2;
-  startGameButton.hide();
-  instructionsButton.hide();
+  screen += 1;
+  nextMupiScreen(screen);
+  //instructionsButton.hide();
+  if (screen == 2) {
+    startGameButton.hide();
+    setTimeout(() => {
+      startQuestions = true;
+    }, 2000);
+    
+  }
 }
 //botón para ir a instrucciones
 function instructionsButtonAction() {
@@ -37,20 +44,22 @@ function saveUserData() {
 //Fuente
 let arialFontBold;
 
+let startQuestions = false;
+let currentQuestion = 0;
 const questions = [
   //Pregunta 1
   {
     question: "Te gusta comer",
     choices: {
-      a: "Dulce",
-      b: "Salado",
+      a: "Dulce",  
+      b: "Salado", 
     },
   },
   //Pregunta 2
   {
     question: "¿Qué te gusta?",
     choices: {
-      a: "Noche",
+      a: "Noche", 
       b: "Dia",
     },
   },
@@ -125,7 +134,7 @@ function startGameAction() {
 }
 
 function setup() {
-  screen = 8;
+  screen = 0;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
   //canvas.style('z-index', '-1');
@@ -151,6 +160,7 @@ function setup() {
   startGameButton.position(windowWidth / 2, windowHeight / 2);
   startGameButton.child('<i class="material-icons">cloud</i>');
   startGameButton.addClass("btn");
+  startGameButton.center();
   startGameButton.mousePressed(startGameButtonAction);
   /*
   startGameButton.mousePressed(function () {
@@ -160,18 +170,22 @@ function setup() {
     startGameButton.hide();
     instructionsButton.hide();
   });*/
-
+  /*
   instructionsButton = createButton('<i class="material-icons">settings</i>');
   instructionsButton.position(windowWidth / 4, windowHeight / 4);
   instructionsButton.child('<i class="material-icons">cloud</i>');
   instructionsButton.addClass("btn");
   instructionsButton.mousePressed(instructionsButtonAction);
+  */
   /*
   btn.mousePressed(function () {
     DeviceOrientationEvent.requestPermission();
   });*/
+
+  /*
   input = createInput("");
   input.position(windowWidth / 4, windowHeight / 4);
+  */
 
   postData(NGROK + "/info", {
     mensaje: "Hola mucho gusto",
@@ -280,7 +294,8 @@ function draw() {
       text(questions[5].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
       break;
     case 8:
-      background(0);
+      socket.emit("send songs", userData);
+      screen = 9;
       break;
     default:
       background(255, 0, 0);
@@ -360,3 +375,39 @@ socket.on("next question", (x) => {
   console.log(screen);
 });
 */
+
+function mousePressed() {
+  if (startQuestions) {
+    if (mouseX > 0 & mouseX < windowWidth/2) {
+      userData.push(questions[currentQuestion].choices.a);
+    }
+    if (mouseX < windowWidth & mouseX > windowWidth/2) {
+      userData.push(questions[currentQuestion].choices.b);
+    }
+    screen +=1;
+    nextMupiScreen(screen);
+    currentQuestion +=1;
+    console.log(userData);
+  }
+
+}
+
+function touchStarted() {
+  if (startQuestions) {
+    if (mouseX > 0 & mouseX < windowWidth/2) {
+      userData.push(questions[currentQuestion].choices.a);
+    }
+    if (mouseX < windowWidth & mouseX > windowWidth/2) {
+      userData.push(questions[currentQuestion].choices.b);
+    }
+    screen +=1;
+    nextMupiScreen(screen);
+    currentQuestion +=1;
+    console.log(userData);
+  }
+
+}
+
+function nextMupiScreen(screen) {
+  socket.emit("nextMupiScreen", screen);
+}
