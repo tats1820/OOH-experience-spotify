@@ -4,6 +4,11 @@ const { Server } = require("socket.io");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
 const SERVER_IP = "192.168.0.14"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
+let userData = {
+  nickname: "",
+  age: "",
+  gmail: "",
+};
 
 //const os = require('os');
 //const IPaddress = os.networkInterfaces().en0[1].address;
@@ -11,7 +16,7 @@ const bodyParser = require("body-parser");
 //creo la app
 const app = express();
 app.use(express.json());
-//permite 
+//permite
 app.use("/app", express.static("public-app"));
 app.use("/mupi", express.static("public-mupi"));
 //app.use(bodyParser.urlencoded({extended:false}))

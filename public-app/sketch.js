@@ -1,3 +1,5 @@
+const { text } = require("body-parser");
+
 const NGROK = `https://${window.location.hostname}`;
 console.log("Server IP: ", NGROK);
 let socket = io(NGROK, { path: "/real-time" });
@@ -15,7 +17,7 @@ let img2;
 let screen;
 let startGameButton;
 let instructionsButton;
-let saveUserdataButton;
+let saveUserDataButton;
 let points = [];
 let input;
 
@@ -32,8 +34,14 @@ function instructionsButtonAction() {
   instructionsButton.hide();
 }
 function saveUserData() {
-  saveUserdataButton.hide();
+  screen = 9;
+  saveUserDataButton.hide();
+  startGameButton.hide();
+  instructionsButton.hide();
+  background(100);
+  text("send a post request", 20, 40);
 }
+
 //Fuente
 let arialFontBold;
 
@@ -166,13 +174,24 @@ function setup() {
   instructionsButton.child('<i class="material-icons">cloud</i>');
   instructionsButton.addClass("btn");
   instructionsButton.mousePressed(instructionsButtonAction);
+
+  saveUserDataButton = createButton(
+    '<i class="material-icons">check_circle</i>'
+  );
+  saveUserDataButton.position(windowWidth / 3, windowHeight - 100);
+  saveUserDataButton.child('<i class="material-icons">cloud</i>');
+  saveUserDataButton.addClass("btn");
+  saveUserDataButton.mousePressed(saveUserData);
   /*
   btn.mousePressed(function () {
     DeviceOrientationEvent.requestPermission();
   });*/
+  /*
   input = createInput("");
   input.position(windowWidth / 4, windowHeight / 4);
-
+*/
+  input = createInput();
+  input.position(windowWidth / 2, windowHeight - 100);
   postData(NGROK + "/info", {
     mensaje: "Hola mucho gusto",
     msg: "lalalal",
@@ -281,6 +300,9 @@ function draw() {
       break;
     case 8:
       background(0);
+      break;
+    case 9:
+      background(255);
       break;
     default:
       background(255, 0, 0);
