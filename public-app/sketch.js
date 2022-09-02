@@ -165,7 +165,7 @@ function startGameAction() {
 }
 
 function setup() {
-  screen = 9;
+  screen = 0;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
   //canvas.style('z-index', '-1');
