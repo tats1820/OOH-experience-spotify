@@ -15,6 +15,9 @@ let img7;
 let img8;
 let img9;
 
+let img10;
+let img11;
+
 //Fuente
 let arialFontBold;
 
@@ -28,7 +31,9 @@ let mupiWidth,
 
 
 function preload() {
-
+  //Mupi
+  img10 = loadImage("mupiimages/Fondomupi1.png");
+  img11 = loadImage("mupiimages/Fondomupi2.png");
   img1 = loadImage("mupiimages/muppi2.png");
 
   //Tutorial
@@ -74,7 +79,13 @@ function draw() {
 
   switch (screen) {
     case 0:
-      image(img1, 650, 100, 550, 800);
+      image(img10, 0, 0, windowWidth, windowHeight);
+      image(img11, windowWidth/3, windowHeight/13, windowWidth/3, windowHeight);
+      fill(255, 255, 255);
+      textSize(70);
+      textFont(arialFontBold);
+      textAlign(CENTER);
+      text('Can you remember this song?', windowWidth/2, windowHeight/5);
       break;
 
     case 1:
@@ -83,55 +94,61 @@ function draw() {
       fill(255, 255, 255);
       textSize(60);
       textFont(arialFontBold);
-      text('Mueve tu celular a los lados para elegir', 390,100);
+      text('Mueve tu celular a los lados para elegir', windowWidth/2, windowHeight/6);
       break;
 
     case 2:
       image(img2, 0, 0, windowWidth, windowHeight);
       fill(255, 255, 255);
-      textSize(40);
+      textSize(100);
       textFont(arialFontBold);
-      text('¿Qué te gusta comer?', 750,500);
+      textAlign(CENTER);
+      text('¿Qué te gusta comer?', windowWidth/2, windowHeight/2);
       break;
 
     case 3:
       image(img3, 0, 0, windowWidth, windowHeight);
       fill(255, 255, 255);
-      textSize(40);
+      textSize(100);
       textFont(arialFontBold);
-      text('¿Qué te gusta?', 750,500);
+      textAlign(CENTER);
+      text('¿Qué te gusta?', windowWidth/2, windowHeight/2);
       break;
 
     case 4:
       image(img4, 0, 0, windowWidth, windowHeight);
       fill(255, 255, 255);
-      textSize(40);
+      textSize(100);
       textFont(arialFontBold);
-      text('¿Qué prefieres?', 750,500);
+      textAlign(CENTER);
+      text('¿Qué prefieres?', windowWidth/2, windowHeight/2);
       break;
 
     case 5:
       image(img5, 0, 0, windowWidth, windowHeight);
       fill(255, 255, 255);
-      textSize(40);
+      textSize(100);
       textFont(arialFontBold);
-      text('Si fueras un animal...', 750,500);
+      textAlign(CENTER);
+      text('Si fueras un animal...', windowWidth/2, windowHeight/2);
       break;
 
     case 6:
       image(img6, 0, 0, windowWidth, windowHeight);
       fill(255, 255, 255);
-      textSize(40);
+      textSize(100);
       textFont(arialFontBold);
-      text('Te gusta más', 750,500);
+      textAlign(CENTER);
+      text('Te gusta más', windowWidth/2, windowHeight/2);
       break;
 
     case 7:
       image(img7, 0, 0, windowWidth, windowHeight);
       fill(255, 255, 255);
-      textSize(40);
+      textSize(100);
       textFont(arialFontBold);
-      text('Te gusta escuchar', 750,500);
+      textAlign(CENTER);
+      text('Te gusta escuchar', windowWidth/2, windowHeight/2);
       break;
 
     case 8:
