@@ -49,7 +49,9 @@ function preload() {
   img7 = loadImage("mupiimages/Pantallamupi6.png");
 
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
+
 }
+
 
 function setup() {
   frameRate(60);

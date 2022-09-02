@@ -251,6 +251,11 @@ function draw() {
   switch (screen) {
     case 0:
       image(img1, 0, 0, windowWidth, windowHeight);
+      inputNickname.hide();
+      inputGmail.hide();
+      inputAge.hide();
+
+      saveUserDataButton.hide();
       break;
 
     case 1:
