@@ -2,7 +2,7 @@
 const express = require("express");
 const { Server } = require("socket.io");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "192.168.0.14"; // Cambiar por la IP del computador
+const SERVER_IP = "192.168.20.23"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
 const e = require("express");
 
@@ -35,13 +35,14 @@ let total = 7;
 let puntaje = 0;
 
 //Música
-let songPlaylist = [{
-  tag: 'Dulce',
-  song: 'canciondulce'
+let songPlaylist = [
+  {
+    tag: "Dulce",
+    song: "canciondulce",
   },
   {
-  tag: 'Salado',
-  song: 'cancionsalado'
+    tag: "Salado",
+    song: "cancionsalado",
   },
 ];
 
@@ -63,22 +64,20 @@ io.on("connection", (socket) => {
 
   socket.on("positions", (screen) => {
     console.log(screen);
-    
   });
-  
+
   socket.on("send songs", (userData) => {
     console.log(userData);
     let listSongs = [];
-    userData.forEach(answer => {
-      songPlaylist.forEach(ti => {
+    userData.forEach((answer) => {
+      songPlaylist.forEach((ti) => {
         if (ti.tag == answer) {
-          listSongs.push(ti.song)
+          listSongs.push(ti.song);
         }
       });
-      
     });
     console.log(listSongs);
-    socket.broadcast.emit('listsongs', listSongs);
+    socket.broadcast.emit("listsongs", listSongs);
   });
 
   socket.on("mobile-instructions", (instructions) => {
@@ -107,9 +106,7 @@ io.on("connection", (socket) => {
 });
 
 //app.post(`http://${SERVER_IP}:${PORT}/app`, (req, res, next) => {
-app.post(`/info`, (req, res, next) => {
-  console.log(req.body, "TEH REQUEST");
+app.post(`/lead`, (req, res, next) => {
+  console.log(req.body, "THE REQUEST");
   console.log("POST");
 });
-
-

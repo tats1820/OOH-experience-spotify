@@ -17,7 +17,9 @@ let startGameButton;
 let instructionsButton;
 let saveUserdataButton;
 let userData = [];
-let input;
+let inputNickname;
+let inputGmail;
+let inputAge;
 
 //botón para empezar
 function startGameButtonAction() {
@@ -29,7 +31,6 @@ function startGameButtonAction() {
     setTimeout(() => {
       startQuestions = true;
     }, 2000);
-    
   }
 }
 //botón para ir a instrucciones
@@ -38,6 +39,7 @@ function instructionsButtonAction() {
   startGameButton.show();
   instructionsButton.hide();
 }
+/*
 function saveUserData() {
   screen = 9;
   saveUserDataButton.hide();
@@ -45,6 +47,24 @@ function saveUserData() {
   instructionsButton.hide();
   background(100);
   text("send a post request", 20, 40);
+}*/
+function saveUserData() {
+  postData(NGROK + "/lead", newLead).then((data) => {
+    console.log(data, "THE DATA");
+  });
+  console.log(newLead);
+}
+function onInputNickname() {
+  newLead.nickname = this.value();
+  console.log(this.value());
+}
+function onInputGmail() {
+  newLead.gmail = this.value();
+  console.log(this.value());
+}
+function onInputAge() {
+  newLead.age = this.value();
+  console.log(this.value());
 }
 
 //Fuente
@@ -57,15 +77,15 @@ const questions = [
   {
     question: "Te gusta comer",
     choices: {
-      a: "Dulce",  
-      b: "Salado", 
+      a: "Dulce",
+      b: "Salado",
     },
   },
   //Pregunta 2
   {
     question: "¿Qué te gusta?",
     choices: {
-      a: "Noche", 
+      a: "Noche",
       b: "Dia",
     },
   },
@@ -115,6 +135,11 @@ const questions = [
   },
 ];
 
+let newLead = {
+  nickname: "",
+  gmail: "",
+  age: "",
+};
 function preload() {
   img1 = loadImage("appimages/Tutorial1.png");
   img2 = loadImage("appimages/Tutorial2.png");
@@ -140,7 +165,7 @@ function startGameAction() {
 }
 
 function setup() {
-  screen = 0;
+  screen = 9;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
   //canvas.style('z-index', '-1');
@@ -168,6 +193,29 @@ function setup() {
   startGameButton.addClass("btn");
   startGameButton.center();
   startGameButton.mousePressed(startGameButtonAction);
+
+  saveUserDataButton = createButton(
+    '<i class="material-icons">check_circle</i>'
+  );
+  saveUserDataButton.position(windowWidth / 2, windowHeight / 2);
+  saveUserDataButton.child('<i class="material-icons">cloud</i>');
+  saveUserDataButton.addClass("btn");
+  saveUserDataButton.center();
+  saveUserDataButton.mousePressed(saveUserData);
+  if (true) {
+    inputNickname = createInput("", "text");
+    inputNickname.position(windowWidth / 3, windowHeight / 4);
+    inputNickname.input(onInputNickname);
+
+    inputGmail = createInput("", "text");
+    inputGmail.position(windowWidth / 2, windowHeight / 2 + 50);
+    inputGmail.input(onInputGmail);
+
+    inputAge = createInput("", "text");
+    inputAge.position(windowWidth / 2, windowHeight / 2 + 100);
+    inputAge.input(onInputAge);
+  }
+
   /*
   startGameButton.mousePressed(function () {
     DeviceOrientationEvent.requestPermission();
@@ -192,13 +240,6 @@ function setup() {
   input = createInput("");
   input.position(windowWidth / 4, windowHeight / 4);
   */
-
-  postData(NGROK + "/info", {
-    mensaje: "Hola mucho gusto",
-    msg: "lalalal",
-  }).then((data) => {
-    console.log(data, "THE DATA");
-  });
 }
 
 function draw() {
@@ -303,6 +344,11 @@ function draw() {
       socket.emit("send songs", userData);
       screen = 9;
       break;
+    case 9:
+      background(0);
+      socket.emit("send info newLead", newLead);
+
+      break;
     default:
       background(255, 0, 0);
       break;
@@ -384,34 +430,32 @@ socket.on("next question", (x) => {
 
 function mousePressed() {
   if (startQuestions) {
-    if (mouseX > 0 & mouseX < windowWidth/2) {
+    if ((mouseX > 0) & (mouseX < windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.a);
     }
-    if (mouseX < windowWidth & mouseX > windowWidth/2) {
+    if ((mouseX < windowWidth) & (mouseX > windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.b);
     }
-    screen +=1;
+    screen += 1;
     nextMupiScreen(screen);
-    currentQuestion +=1;
+    currentQuestion += 1;
     console.log(userData);
   }
-
 }
 
 function touchStarted() {
   if (startQuestions) {
-    if (mouseX > 0 & mouseX < windowWidth/2) {
+    if ((mouseX > 0) & (mouseX < windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.a);
     }
-    if (mouseX < windowWidth & mouseX > windowWidth/2) {
+    if ((mouseX < windowWidth) & (mouseX > windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.b);
     }
-    screen +=1;
+    screen += 1;
     nextMupiScreen(screen);
-    currentQuestion +=1;
+    currentQuestion += 1;
     console.log(userData);
   }
-
 }
 
 function nextMupiScreen(screen) {
