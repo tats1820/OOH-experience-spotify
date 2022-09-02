@@ -10,6 +10,7 @@ let isTouched = false;
 //Imágenes
 let img1;
 let img2;
+let img12;
 
 //Pantalla inicio
 let screen;
@@ -143,6 +144,7 @@ let newLead = {
 function preload() {
   img1 = loadImage("appimages/Tutorial1.png");
   img2 = loadImage("appimages/Tutorial2.png");
+  img12 = loadImage("appimages/cancionfinal.png");
   arialFontBold = loadFont("appimages/ArialBold.ttf");
 }
 
@@ -349,7 +351,7 @@ function draw() {
       break;
     case 8:
       socket.emit("send songs", userData);
-      screen = 9;
+      image(img12, 0, 0, windowWidth, windowHeight);
       break;
     case 9:
       background(248, 117, 161);
