@@ -195,15 +195,6 @@ socket.on("mupi-size", (deviceSize) => {
 });
 
 socket.on("accion 1", (action) => {
-<<<<<<< HEAD
-  /*ballSize += 20;
-  alert("izquierda");*/
-});
-
-socket.on("accion 2", (action) => {
-  /*ballSize -= 20;
-  alert("derecha");*/
-=======
   ballSize += 20;
   alert("izquierda");
   points += 5;
@@ -213,5 +204,4 @@ socket.on("accion 2", (action) => {
   ballSize -= 20;
   alert("derecha");
   points += 10;
->>>>>>> caa45a7c77e10873b3b55c921d13be34925b8857
 });
