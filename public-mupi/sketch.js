@@ -69,8 +69,8 @@ socket.on("mupi-instructions", (instructions) => {
       console.log({ controllerX, controllerY });
       break;
     case 1:
-      let { pAccelerationX, pAccelerationY, pAccelerationZ } = instructions;
-      ballSize = pAccelerationY < 0 ? pAccelerationY * -2 : pAccelerationY * 2;
+      /*let { pAccelerationX, pAccelerationY, pAccelerationZ } = instructions;
+      ballSize = pAccelerationY < 0 ? pAccelerationY * -2 : pAccelerationY * 2;*/
       break;
     case 2:
       let { rotationX, rotationY } = instructions;
@@ -90,11 +90,11 @@ socket.on("mupi-size", (deviceSize) => {
 });
 
 socket.on("accion 1", (action) => {
-  ballSize += 20;
-  alert("izquierda");
+  /*ballSize += 20;
+  alert("izquierda");*/
 });
 
 socket.on("accion 2", (action) => {
-  ballSize -= 20;
-  alert("derecha");
+  /*ballSize -= 20;
+  alert("derecha");*/
 });
