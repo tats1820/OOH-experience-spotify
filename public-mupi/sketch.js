@@ -33,12 +33,12 @@ let mupiWidth,
 function preload() {
   //Mupi
   img10 = loadImage("mupiimages/Fondomupi1.png");
-  img11 = loadImage("mupiimages/Fondomupi2.png");
+  img11 = loadImage("mupiimages/chicamupi.png.png");
   img1 = loadImage("mupiimages/muppi2.png");
 
   //Tutorial
   img8 = loadImage("mupiimages/Tutorialmupi1.png")
-  img9 = loadImage("mupiimages/Instruccion1.png")
+  img9 = loadImage("mupiimages/instrucciones.png")
 
   //Preguntas
   img2 = loadImage("mupiimages/Pantallamupi1.png");
@@ -94,7 +94,7 @@ function draw() {
       fill(255, 255, 255);
       textSize(60);
       textFont(arialFontBold);
-      text('Mueve tu celular a los lados para elegir', windowWidth/2, windowHeight/6);
+      text('Oprime el lado de la respuesta', windowWidth/2, windowHeight/6);
       break;
 
     case 2:
@@ -154,8 +154,7 @@ function draw() {
     case 8:
       //image(img8, 0, 0, windowWidth, windowHeight);
       break;
-        
-  
+      
     default:
       break;
   }
