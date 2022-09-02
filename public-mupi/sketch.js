@@ -28,8 +28,6 @@ let deviceWidth,
 let mupiWidth,
   mupiHeight = 0;
 
-
-
 function preload() {
   //Mupi
   img10 = loadImage("mupiimages/Fondomupi1.png");
@@ -38,8 +36,8 @@ function preload() {
   img13 = loadImage("mupiimages/qr-code.png");
 
   //Tutorial
-  img8 = loadImage("mupiimages/Tutorialmupi1.png")
-  img9 = loadImage("mupiimages/instrucciones.png")
+  img8 = loadImage("mupiimages/Tutorialmupi1.png");
+  img9 = loadImage("mupiimages/instrucciones.png");
 
   //Preguntas
   img2 = loadImage("mupiimages/Pantallamupi1.png");
@@ -50,9 +48,7 @@ function preload() {
   img7 = loadImage("mupiimages/Pantallamupi6.png");
 
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
-
 }
-
 
 function setup() {
   frameRate(60);
@@ -83,13 +79,23 @@ function draw() {
   switch (screen) {
     case 0:
       image(img10, 0, 0, windowWidth, windowHeight);
-      image(img11, windowWidth/3, windowHeight/13, windowWidth/3, windowHeight);
-      image(img13, windowWidth/2.3, windowHeight/2, 200, 200)
+      image(
+        img11,
+        windowWidth / 3,
+        windowHeight / 13,
+        windowWidth / 3,
+        windowHeight
+      );
+      image(img13, windowWidth / 2.3, windowHeight / 2, 200, 200);
       fill(255, 255, 255);
       textSize(70);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('Descubre la canción de tu vida aqui', windowWidth/2, windowHeight/5);
+      text(
+        "Descubre la canción de tu vida aqui",
+        windowWidth / 2,
+        windowHeight / 5
+      );
       break;
 
     case 1:
@@ -99,7 +105,7 @@ function draw() {
       textSize(60);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('Oprime el lado de la respuesta', windowWidth/2, windowHeight/6);
+      text("Oprime el lado de la respuesta", windowWidth / 2, windowHeight / 6);
       break;
 
     case 2:
@@ -108,7 +114,7 @@ function draw() {
       textSize(100);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('¿Qué te gusta comer?', windowWidth/2, windowHeight/2);
+      text("¿Qué te gusta comer?", windowWidth / 2, windowHeight / 2);
       break;
 
     case 3:
@@ -117,7 +123,7 @@ function draw() {
       textSize(100);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('¿Qué te gusta?', windowWidth/2, windowHeight/2);
+      text("¿Qué te gusta?", windowWidth / 2, windowHeight / 2);
       break;
 
     case 4:
@@ -126,7 +132,7 @@ function draw() {
       textSize(100);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('¿Qué prefieres?', windowWidth/2, windowHeight/2);
+      text("¿Qué prefieres?", windowWidth / 2, windowHeight / 2);
       break;
 
     case 5:
@@ -135,7 +141,7 @@ function draw() {
       textSize(100);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('Si fueras un animal...', windowWidth/2, windowHeight/2);
+      text("Si fueras un animal...", windowWidth / 2, windowHeight / 2);
       break;
 
     case 6:
@@ -144,7 +150,7 @@ function draw() {
       textSize(100);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('Te gusta más', windowWidth/2, windowHeight/2);
+      text("Te gusta más", windowWidth / 2, windowHeight / 2);
       break;
 
     case 7:
@@ -153,13 +159,13 @@ function draw() {
       textSize(100);
       textFont(arialFontBold);
       textAlign(CENTER);
-      text('Te gusta escuchar', windowWidth/2, windowHeight/2);
+      text("Te gusta escuchar", windowWidth / 2, windowHeight / 2);
       break;
 
     case 8:
       //image(img8, 0, 0, windowWidth, windowHeight);
       break;
-      
+
     default:
       break;
   }

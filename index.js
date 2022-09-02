@@ -82,25 +82,7 @@ io.on("connection", (socket) => {
 
   socket.on("mobile-instructions", (instructions) => {
     //console.log(instructions, validated);
-    if (instructions.rotationY < -30 && validated) {
-      socket.broadcast.emit("accion 1"); //izquierda
-      console.log("izquierda");
-      validated = false;
-      selectedLeft = true;
-    } else if (instructions.rotationY > -30 && instructions.rotationY < 30) {
-      validated = true;
-      if (selectedLeft || selectedRight) {
-        socket.broadcast.emit("next question");
-        console.log("siguiente pregunta");
-        selectedLeft = false;
-        selectedRight = false;
-      }
-    } else if (instructions.rotationY > 30 && validated) {
-      socket.broadcast.emit("accion 2"); // derecha
-      validated = false;
-      selectedRight = true;
-    }
-
+    
     socket.broadcast.emit("mupi-instructions", instructions);
   });
 });
