@@ -1,3 +1,5 @@
+const { text } = require("body-parser");
+
 const NGROK = `https://${window.location.hostname}`;
 console.log("Server IP: ", NGROK);
 let socket = io(NGROK, { path: "/real-time" });
@@ -12,8 +14,33 @@ let img1;
 let img2;
 
 //Pantalla inicio
-let screen = 0;
+let screen;
 let startGameButton;
+let instructionsButton;
+let saveUserDataButton;
+let points = [];
+let input;
+
+//botón para empezar
+function startGameButtonAction() {
+  screen = 2;
+  startGameButton.hide();
+  instructionsButton.hide();
+}
+//botón para ir a instrucciones
+function instructionsButtonAction() {
+  screen = 1;
+  startGameButton.show();
+  instructionsButton.hide();
+}
+function saveUserData() {
+  screen = 9;
+  saveUserDataButton.hide();
+  startGameButton.hide();
+  instructionsButton.hide();
+  background(100);
+  text("send a post request", 20, 40);
+}
 
 //Fuente
 let arialFontBold;
@@ -84,7 +111,7 @@ const questions = [
 function preload() {
   img1 = loadImage("appimages/Tutorial1.png");
   img2 = loadImage("appimages/Tutorial2.png");
-  arialFontBold = loadFont("appimages/ArialBold.ttf")
+  arialFontBold = loadFont("appimages/ArialBold.ttf");
 }
 
 const postData = async (url = "", data = {}) => {
@@ -102,9 +129,11 @@ const postData = async (url = "", data = {}) => {
 function startGameAction() {
   screen = 1;
   startGameButton.hide();
+  console.log("a");
 }
 
 function setup() {
+  screen = 8;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
   //canvas.style('z-index', '-1');
@@ -115,22 +144,54 @@ function setup() {
   controllerY = windowHeight / 2;
   background(0);
   angleMode(DEGREES);
-
+  points = 0;
   socket.emit("device-size", { windowWidth, windowHeight });
-
+  /*
   let btn = createButton("Permitir movimiento");
   btn.mousePressed(function () {
     DeviceOrientationEvent.requestPermission();
     screen = 1;
     btn.hide();
     console.log("a");
-  });
+  });*/
 
+  startGameButton = createButton('<i class="material-icons">play_arrow</i>');
+  startGameButton.position(windowWidth / 2, windowHeight / 2);
+  startGameButton.child('<i class="material-icons">cloud</i>');
+  startGameButton.addClass("btn");
+  startGameButton.mousePressed(startGameButtonAction);
+  /*
+  startGameButton.mousePressed(function () {
+    DeviceOrientationEvent.requestPermission();
+    // startGameButtonAction();
+    screen = 2;
+    startGameButton.hide();
+    instructionsButton.hide();
+  });*/
+
+  instructionsButton = createButton('<i class="material-icons">settings</i>');
+  instructionsButton.position(windowWidth / 4, windowHeight / 4);
+  instructionsButton.child('<i class="material-icons">cloud</i>');
+  instructionsButton.addClass("btn");
+  instructionsButton.mousePressed(instructionsButtonAction);
+
+  saveUserDataButton = createButton(
+    '<i class="material-icons">check_circle</i>'
+  );
+  saveUserDataButton.position(windowWidth / 3, windowHeight - 100);
+  saveUserDataButton.child('<i class="material-icons">cloud</i>');
+  saveUserDataButton.addClass("btn");
+  saveUserDataButton.mousePressed(saveUserData);
   /*
   btn.mousePressed(function () {
     DeviceOrientationEvent.requestPermission();
   });*/
-
+  /*
+  input = createInput("");
+  input.position(windowWidth / 4, windowHeight / 4);
+*/
+  input = createInput();
+  input.position(windowWidth / 2, windowHeight - 100);
   postData(NGROK + "/info", {
     mensaje: "Hola mucho gusto",
     msg: "lalalal",
@@ -147,7 +208,6 @@ function draw() {
     */
   switch (screen) {
     case 0:
-      socket.emit("switchScreen", screen);
       image(img1, 0, 0, windowWidth, windowHeight);
       break;
 
@@ -238,7 +298,12 @@ function draw() {
       text(questions[5].choices.a, windowWidth / 4, windowHeight / 2);
       text(questions[5].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
       break;
-      
+    case 8:
+      background(0);
+      break;
+    case 9:
+      background(255);
+      break;
     default:
       background(255, 0, 0);
       break;
@@ -297,9 +362,9 @@ function deviceMoved() {
 function deviceShaken() {
   //socket.emit('mobile-instructions', 'Moved!');
   //background(0, 255, 255);
-  if ((screen = 1)) {
+  /* if ((screen = 1)) {
     screen = 2;
-  }
+  }*/
 }
 
 function windowResized() {
@@ -311,8 +376,9 @@ function newCursor(x, y) {
     fill(255);
     ellipse(x, y, 10, 10);*/
 }
-
+/*
 socket.on("next question", (x) => {
   screen += 1;
   console.log(screen);
 });
+*/
