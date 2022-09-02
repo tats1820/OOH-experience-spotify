@@ -165,7 +165,7 @@ function startGameAction() {
 }
 
 function setup() {
-  screen = 0;
+  screen = 9;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
   //canvas.style('z-index', '-1');
@@ -204,17 +204,17 @@ function setup() {
   saveUserDataButton.mousePressed(saveUserData);
 
   inputNickname = createInput("", "text");
-  inputNickname.position(windowWidth / 3, windowHeight / 4);
+  inputNickname.position(windowWidth / 4, windowHeight / 4);
   inputNickname.input(onInputNickname);
   inputNickname.style("display", "none");
 
   inputGmail = createInput("", "text");
-  inputGmail.position(windowWidth / 2, windowHeight / 2 + 50);
+  inputGmail.position(windowWidth / 4, windowHeight / 4 + 50);
   inputGmail.input(onInputGmail);
   inputGmail.style("display", "none");
 
   inputAge = createInput("", "text");
-  inputAge.position(windowWidth / 2, windowHeight / 2 + 100);
+  inputAge.position(windowWidth / 4, windowHeight / 4 + 100);
   inputAge.input(onInputAge);
   inputAge.style("display", "none");
 
@@ -352,12 +352,13 @@ function draw() {
       screen = 9;
       break;
     case 9:
+      background(248, 117, 161);
+
       inputNickname.style("display", "block");
       inputGmail.style("display", "block");
       inputAge.style("display", "block");
-      background(0);
-
       break;
+
     default:
       background(255, 0, 0);
       break;
