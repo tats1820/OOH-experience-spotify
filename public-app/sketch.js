@@ -176,7 +176,7 @@ function setup() {
   controllerY = windowHeight / 2;
   background(0);
   angleMode(DEGREES);
-  points = 0;
+
   socket.emit("device-size", { windowWidth, windowHeight });
   /*
   let btn = createButton("Permitir movimiento");
@@ -202,19 +202,21 @@ function setup() {
   saveUserDataButton.addClass("btn");
   saveUserDataButton.center();
   saveUserDataButton.mousePressed(saveUserData);
-  if (true) {
-    inputNickname = createInput("", "text");
-    inputNickname.position(windowWidth / 3, windowHeight / 4);
-    inputNickname.input(onInputNickname);
 
-    inputGmail = createInput("", "text");
-    inputGmail.position(windowWidth / 2, windowHeight / 2 + 50);
-    inputGmail.input(onInputGmail);
+  inputNickname = createInput("", "text");
+  inputNickname.position(windowWidth / 3, windowHeight / 4);
+  inputNickname.input(onInputNickname);
+  inputNickname.style("display", "none");
 
-    inputAge = createInput("", "text");
-    inputAge.position(windowWidth / 2, windowHeight / 2 + 100);
-    inputAge.input(onInputAge);
-  }
+  inputGmail = createInput("", "text");
+  inputGmail.position(windowWidth / 2, windowHeight / 2 + 50);
+  inputGmail.input(onInputGmail);
+  inputGmail.style("display", "none");
+
+  inputAge = createInput("", "text");
+  inputAge.position(windowWidth / 2, windowHeight / 2 + 100);
+  inputAge.input(onInputAge);
+  inputAge.style("display", "none");
 
   /*
   startGameButton.mousePressed(function () {
@@ -350,8 +352,10 @@ function draw() {
       screen = 9;
       break;
     case 9:
+      inputNickname.style("display", "block");
+      inputGmail.style("display", "block");
+      inputAge.style("display", "block");
       background(0);
-      socket.emit("send info newLead", newLead);
 
       break;
     default:
@@ -462,7 +466,6 @@ function touchStarted() {
     console.log(userData);
   }
 }
-
 
 function nextMupiScreen(screen) {
   socket.emit("nextMupiScreen", screen);
