@@ -12,6 +12,20 @@ let img1;
 let img2;
 let img12;
 
+//Canciones
+let cancionDulce;
+let cancionSalado
+let cancionNoche;
+let cancionDia;
+let cancionCalor;
+let cancionFrio;
+let cancionGato;
+let cancionPerro;
+let cancionMontaña;
+let cancionPlaya;
+let cancionPop;
+let cancionRock;
+
 //Pantalla inicio
 let screen;
 let startGameButton;
@@ -126,7 +140,7 @@ const questions = [
     },
   },
 
-  //Pregunta 7
+  //Pregunta 7 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
     question: "Te gusta más",
     choices: {
@@ -141,11 +155,25 @@ let newLead = {
   gmail: "",
   age: "",
 };
+
 function preload() {
   img1 = loadImage("appimages/Tutorial1.png");
   img2 = loadImage("appimages/Tutorial2.png");
   img12 = loadImage("appimages/cancionfinal.png");
   arialFontBold = loadFont("appimages/ArialBold.ttf");
+
+  cancionDulce = loadSound("songs/Dulce.mp3")
+  cancionSalado = loadSound("songs/Salado.mp3")
+  cancionNoche = loadSound("songs/Noche.mp3")
+  cancionDia = loadSound("songs/Dia.mp3")
+  cancionCalor = loadSound("songs/Calor.mp3")
+  cancionFrio = loadSound("songs/Frio.mp3")
+  cancionGato = loadSound("songs/Gato.mp3")
+  cancionPerro = loadSound("songs/Perro.mp3")
+  cancionMontaña = loadSound("songs/Montaña.mp3")
+  cancionPlaya = loadSound("songs/Playa.mp3")
+  cancionPop = loadSound("songs/Pop.mp3")
+  cancionRock = loadSound("songs/Rock.mp3")
 }
 
 const postData = async (url = "", data = {}) => {
