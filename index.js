@@ -2,7 +2,7 @@
 const express = require("express");
 const { Server } = require("socket.io");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "192.168.20.23"; // Cambiar por la IP del computador
+const SERVER_IP = "192.168.0.14"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
 
 //const os = require('os');
@@ -37,11 +37,51 @@ let puntaje = 0;
 let songPlaylist = [
   {
     tag: "Dulce",
-    song: "canciondulce",
+    song: cancionDulce,
   },
   {
     tag: "Salado",
-    song: "cancionsalado",
+    song: cancionSalado,
+  },
+  {
+    tag: "Noche",
+    song: cancionNoche,
+  },
+  {
+    tag: "Día",
+    song: cancionDia,
+  },
+  {
+    tag: "Calor",
+    song: cancionCalor,
+  },
+  {
+    tag: "Frio",
+    song: cancionFrio,
+  },
+  {
+    tag: "Gato",
+    song: cancionGato,
+  },
+  {
+    tag: "Perro",
+    song: cancionPerro,
+  },
+  {
+    tag: "Montaña",
+    song: cancionMontaña,
+  },
+  {
+    tag: "Playa",
+    song: cancionPlaya,
+  },
+  {
+    tag: "Pop",
+    song: cancionPop,
+  },
+  {
+    tag: "Rock",
+    song: cancionRock,
   },
 ];
 

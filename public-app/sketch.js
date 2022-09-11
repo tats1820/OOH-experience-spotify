@@ -11,6 +11,32 @@ let isTouched = false;
 let img1;
 let img2;
 let img12;
+let imgDia;
+let imgNoche;
+let imgCalor;
+let imgFrio;
+let imgDulce;
+let imgSalado;
+let imgMontaña;
+let imgPlaya;
+let imgPop;
+let imgRock;
+let imgGato;
+let imgPerro;
+
+//Canciones
+let cancionDulce;
+let cancionSalado
+let cancionNoche;
+let cancionDia;
+let cancionCalor;
+let cancionFrio;
+let cancionGato;
+let cancionPerro;
+let cancionMontaña;
+let cancionPlaya;
+let cancionPop;
+let cancionRock;
 
 //Pantalla inicio
 let screen;
@@ -118,7 +144,7 @@ const questions = [
     },
   },
 
-  //Pregunta 7
+  //Pregunta 7 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
     question: "Te gusta más",
     choices: {
@@ -136,7 +162,32 @@ let newLead = {
 let back0, back1, back2, back3, back4, back5, girl, boy;
 function preload() {
   img12 = loadImage("appimages/cancionfinal.png");
+  imgCalor = loadImage("appimages/Calor.png");
+  imgDia = loadImage("appimages/Dia.png");
+  imgFrio = loadImage("appimages/Frio.png");
+  imgNoche = loadImage("appimages/Noche.png");
+  imgDulce = loadImage("appimages/Dulce.png");
+  imgSalado = loadImage("appimages/Salado.png");
+  imgGato = loadImage("appimages/Gato.png");
+  imgPerro = loadImage("appimages/Perro.png");
+  imgPlaya = loadImage("appimages/Playa.png");
+  imgMontaña = loadImage("appimages/Montaña.png");
+  imgPop = loadImage("appimages/Pop.png");
+  imgRock = loadImage("appimages/Rock.png");
   arialFontBold = loadFont("appimages/ArialBold.ttf");
+
+  cancionDulce = loadSound("songs/Dulce.mp3")
+  cancionSalado = loadSound("songs/Salado.mp3")
+  cancionNoche = loadSound("songs/Noche.mp3")
+  cancionDia = loadSound("songs/Dia.mp3")
+  cancionCalor = loadSound("songs/Calor.mp3")
+  cancionFrio = loadSound("songs/Frio.mp3")
+  cancionGato = loadSound("songs/Gato.mp3")
+  cancionPerro = loadSound("songs/Perro.mp3")
+  cancionMontaña = loadSound("songs/Montaña.mp3")
+  cancionPlaya = loadSound("songs/Playa.mp3")
+  cancionPop = loadSound("songs/Pop.mp3")
+  cancionRock = loadSound("songs/Rock.mp3")
   boy = loadImage("appimages/boy.png");
   girl = loadImage("appimages/girl.png");
   back0 = loadImage("appimages/back0.png");
@@ -330,7 +381,18 @@ function draw() {
       break;
     case 8:
       socket.emit("send songs", userData);
-      image(img12, 0, 0, windowWidth, windowHeight);
+      image(imgCalor, 0, 0, windowWidth, windowHeight);
+      image(imgFrio, 0, 0, windowWidth, windowHeight);
+      image(imgDia, 0, 0, windowWidth, windowHeight);
+      image(imgNoche, 0, 0, windowWidth, windowHeight);
+      image(imgDulce, 0, 0, windowWidth, windowHeight);
+      image(imgSalado, 0, 0, windowWidth, windowHeight);
+      image(imgGato, 0, 0, windowWidth, windowHeight);
+      image(imgPerro, 0, 0, windowWidth, windowHeight);
+      image(imgPlaya, 0, 0, windowWidth, windowHeight);
+      image(imgMontaña, 0, 0, windowWidth, windowHeight);
+      image(imgPop, 0, 0, windowWidth, windowHeight);
+      image(imgRock, 0, 0, windowWidth, windowHeight);
       break;
     case 9:
       background("#CDF564");
@@ -397,11 +459,6 @@ function deviceMoved() {
         rotationX,
         rotationY,
       });
-
-      /*if (pmouseX > windowWidth || pmouseX < 0){
-                rotationX *= -1;
-            }*/
-      // background(0, 255, 0);
       break;
 
     case 3:
@@ -409,11 +466,6 @@ function deviceMoved() {
 }
 
 function deviceShaken() {
-  //socket.emit('mobile-instructions', 'Moved!');
-  //background(0, 255, 255);
-  /* if ((screen = 1)) {
-    screen = 2;
-  }*/
 }
 
 function windowResized() {
