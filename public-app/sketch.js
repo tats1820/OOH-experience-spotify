@@ -40,15 +40,7 @@ function instructionsButtonAction() {
   startGameButton.show();
   instructionsButton.hide();
 }
-/*
-function saveUserData() {
-  screen = 9;
-  saveUserDataButton.hide();
-  startGameButton.hide();
-  instructionsButton.hide();
-  background(100);
-  text("send a post request", 20, 40);
-}*/
+
 function saveUserData() {
   postData(NGROK + "/lead", newLead).then((data) => {
     console.log(data, "THE DATA");
@@ -141,11 +133,19 @@ let newLead = {
   gmail: "",
   age: "",
 };
+let back0, back1, back2, back3, back4, back5, girl, boy;
 function preload() {
-  img1 = loadImage("appimages/Tutorial1.png");
-  img2 = loadImage("appimages/Tutorial2.png");
   img12 = loadImage("appimages/cancionfinal.png");
   arialFontBold = loadFont("appimages/ArialBold.ttf");
+  boy = loadImage("appimages/boy.png");
+  girl = loadImage("appimages/girl.png");
+  back0 = loadImage("appimages/back0.png");
+  back1 = loadImage("appimages/back1.png");
+  back2 = loadImage("appimages/back2.png");
+  back3 = loadImage("appimages/back3.png");
+  back4 = loadImage("appimages/back4.png");
+  back5 = loadImage("appimages/back5.png");
+  logo = loadImage("svgimages/logo.svg");
 }
 
 const postData = async (url = "", data = {}) => {
@@ -170,196 +170,187 @@ function setup() {
   screen = 0;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
-  //canvas.style('z-index', '-1');
   canvas.style("position", "fixed");
   canvas.style("top", "0");
   canvas.style("right", "0");
+
   controllerX = windowWidth / 2;
   controllerY = windowHeight / 2;
   background(0);
   angleMode(DEGREES);
 
   socket.emit("device-size", { windowWidth, windowHeight });
-  /*
-  let btn = createButton("Permitir movimiento");
-  btn.mousePressed(function () {
-    DeviceOrientationEvent.requestPermission();
-    screen = 1;
-    btn.hide();
-    console.log("a");
-  });*/
 
   startGameButton = createButton('<i class="material-icons">play_arrow</i>');
-  startGameButton.position(windowWidth / 2, windowHeight / 2);
+  startGameButton.center();
+  startGameButton.position(windowWidth / 2.5, windowHeight / 2);
   startGameButton.child('<i class="material-icons">cloud</i>');
   startGameButton.addClass("btn");
-  startGameButton.center();
   startGameButton.mousePressed(startGameButtonAction);
 
   saveUserDataButton = createButton(
     '<i class="material-icons">check_circle</i>'
   );
-  saveUserDataButton.position(windowWidth / 2, windowHeight / 2);
+  saveUserDataButton.position(windowWidth / 2.5, windowHeight / 1.5);
   saveUserDataButton.child('<i class="material-icons">cloud</i>');
   saveUserDataButton.addClass("btn");
-  saveUserDataButton.center();
+
   saveUserDataButton.mousePressed(saveUserData);
   saveUserDataButton.style("display", "none");
   inputNickname = createInput("", "text");
-  inputNickname.position(windowWidth / 4, windowHeight / 4);
+  inputNickname.attribute("placeholder", "Nickname");
+  inputNickname.position(windowWidth / 4, windowHeight / 2.9);
   inputNickname.input(onInputNickname);
+  inputNickname.addClass("input");
   inputNickname.style("display", "none");
 
   inputGmail = createInput("", "text");
-  inputGmail.position(windowWidth / 4, windowHeight / 4 + 50);
+  inputGmail.attribute("placeholder", "Gmail");
+  inputGmail.position(windowWidth / 4, windowHeight / 2.9 + 50);
   inputGmail.input(onInputGmail);
+  inputGmail.addClass("input");
   inputGmail.style("display", "none");
 
   inputAge = createInput("", "text");
-  inputAge.position(windowWidth / 4, windowHeight / 4 + 100);
+  inputAge.attribute("placeholder", "Age");
+  inputAge.position(windowWidth / 4, windowHeight / 2.9 + 100);
   inputAge.input(onInputAge);
+  inputAge.addClass("input");
   //inputAge.style("display", "none");
-
-  /*
-  startGameButton.mousePressed(function () {
-    DeviceOrientationEvent.requestPermission();
-    // startGameButtonAction();
-    screen = 2;
-    startGameButton.hide();
-    instructionsButton.hide();
-  });*/
-  /*
-  instructionsButton = createButton('<i class="material-icons">settings</i>');
-  instructionsButton.position(windowWidth / 4, windowHeight / 4);
-  instructionsButton.child('<i class="material-icons">cloud</i>');
-  instructionsButton.addClass("btn");
-  instructionsButton.mousePressed(instructionsButtonAction);
-  */
-  /*
-  btn.mousePressed(function () {
-    DeviceOrientationEvent.requestPermission();
-  });*/
-
-  /*
-  input = createInput("");
-  input.position(windowWidth / 4, windowHeight / 4);
-  */
 }
 
+function conicalGradient(colors) {
+  let gradient = drawingContext.createConicGradient(
+    PI / 2,
+    windowWidth / 2,
+    windowHeight / 3
+  );
+  gradient.addColorStop(0, colors[0]);
+  gradient.addColorStop(1, colors[1]);
+  drawingContext.fillStyle = gradient;
+}
+
+function textOptions(questionNumber) {
+  textAlign(CENTER, CENTER);
+  textSize(24);
+  textFont(arialFontBold);
+  text(questions[questionNumber].choices.a, windowWidth / 4, windowHeight / 2);
+  text(
+    questions[questionNumber].choices.b,
+    (windowWidth / 4) * 3,
+    windowHeight / 2
+  );
+}
 function draw() {
-  /*background(0, 5);
-    newCursor(pmouseX, pmouseY);
-    fill(255);
-    ellipse(controllerX, controllerY, 50, 50);
-    */
   switch (screen) {
     case 0:
-      image(img1, 0, 0, windowWidth, windowHeight);
+      background("#CDF564");
+      image(back0, -40, -40);
+      textAlign(LEFT, TOP);
+      textSize(50);
+      textFont(arialFontBold);
+      text("¡Juguemos This or That!", windowWidth / 8, 50, 300, 300);
+      textSize(24);
+      text("Elige la opción que más prefieras", 50, 250, 238, 54);
+
       inputNickname.hide();
       inputGmail.hide();
       inputAge.hide();
-
       saveUserDataButton.hide();
+      image(boy, windowWidth / 4.5, windowHeight / 1.8);
+      image(logo, windowWidth / 8, windowHeight / 1.1);
+      // image(doodle1, 200, 100, doodle1.width, doodle1.height);
       break;
 
     case 1:
-      image(img2, 0, 0, windowWidth, windowHeight);
+      background("#CDF564");
+      image(back1, -60, -80);
+      textAlign(LEFT, TOP);
+      textSize(32);
+      textFont(arialFontBold);
+      text("¡Dale tap a la opción que más te guste!", 50, 200, 238, 354);
+      image(girl, windowWidth / 8, windowHeight / 3);
+      image(logo, windowWidth / 8, windowHeight / 1.1);
       break;
 
     case 2:
-      background(255, 255, 255);
-      fill(235, 78, 54);
-      rect(0, 0, windowWidth / 2, windowHeight);
-      fill(82, 40, 75);
-      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
-      textAlign(CENTER, CENTER);
-      fill(255, 255, 255);
-      textSize(24);
-      textFont(arialFontBold);
-      text(questions[0].choices.a, windowWidth / 4, windowHeight / 2);
-      text(questions[0].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      conicalGradient(
+        [color(205, 245, 100), color(84, 73, 245)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back3, -60, -50);
+      textOptions(0, 0);
+
       break;
 
     case 3:
-      background(255, 255, 255);
-      fill(9, 101, 79);
-      rect(0, 0, windowWidth / 2, windowHeight);
-      fill(82, 40, 75);
-      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
-      textAlign(CENTER, CENTER);
-      fill(255, 255, 255);
-      textSize(24);
-      textFont(arialFontBold);
-      text(questions[1].choices.a, windowWidth / 4, windowHeight / 2);
-      text(questions[1].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      conicalGradient(
+        [color(245, 137, 224), color(244, 87, 47)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back2, -60, -50);
+      textOptions(1, 1);
       break;
 
     case 4:
-      background(255, 255, 255);
-      fill(36, 51, 82);
-      rect(0, 0, windowWidth / 2, windowHeight);
-      fill(156, 43, 123);
-      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
-      textAlign(CENTER, CENTER);
-      fill(255, 255, 255);
-      textSize(24);
-      textFont(arialFontBold);
-      text(questions[2].choices.a, windowWidth / 4, windowHeight / 2);
-      text(questions[2].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      conicalGradient(
+        [color(39, 51, 125), color(144, 230, 174)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back4, -60, -50);
+      textOptions(2, 2);
+
       break;
 
     case 5:
-      background(255, 255, 255);
-      fill(196, 202, 98);
-      rect(0, 0, windowWidth / 2, windowHeight);
-      fill(0, 32, 64);
-      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
-      textAlign(CENTER, CENTER);
-      fill(255, 255, 255);
-      textSize(24);
-      textFont(arialFontBold);
-      text(questions[3].choices.a, windowWidth / 4, windowHeight / 2);
-      text(questions[3].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      conicalGradient(
+        [color(205, 245, 100), color(112, 83, 120)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back3, -50, -50);
+      textOptions(3, 3);
       break;
 
     case 6:
-      background(255, 255, 255);
-      fill(156, 43, 123);
-      rect(0, 0, windowWidth / 2, windowHeight);
-      fill(255, 188, 75);
-      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
-      textAlign(CENTER, CENTER);
-      fill(255, 255, 255);
-      textSize(24);
-      textFont(arialFontBold);
-      text(questions[4].choices.a, windowWidth / 4, windowHeight / 2);
-      text(questions[4].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      conicalGradient(
+        [color(255, 188, 75), color(237, 24, 161)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back2, -60, -50);
+      textOptions(4, 4);
       break;
 
     case 7:
-      background(255, 255, 255);
-      fill(81, 155, 244);
-      rect(0, 0, windowWidth / 2, windowHeight);
-      fill(35, 51, 103);
-      rect(windowWidth / 2, 0, windowWidth / 2, windowHeight);
-      textAlign(CENTER, CENTER);
-      fill(255, 255, 255);
-      textSize(24);
-      textFont(arialFontBold);
-      text(questions[5].choices.a, windowWidth / 4, windowHeight / 2);
-      text(questions[5].choices.b, (windowWidth / 4) * 3, windowHeight / 2);
+      conicalGradient(
+        [color(244, 87, 47), color(112, 83, 120)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back4, -60, -50);
+      textOptions(5, 5);
       break;
     case 8:
       socket.emit("send songs", userData);
       image(img12, 0, 0, windowWidth, windowHeight);
       break;
     case 9:
-      background(248, 117, 161);
+      background("#CDF564");
+      image(back5, -80, -20);
+      textAlign(LEFT, TOP);
+      textSize(24);
+      textFont(arialFontBold);
+      text(
+        "¡Comparte tu canción en tus redes sociales y recibe un mes gratis de Spotify!",
+        50,
+        windowHeight / 11,
+        238,
+        354
+      );
 
       inputNickname.style("display", "block");
       inputGmail.style("display", "block");
       inputAge.style("display", "block");
       saveUserDataButton.style("display", "block");
+      image(logo, windowWidth / 8, windowHeight / 1.1);
       break;
 
     default:
