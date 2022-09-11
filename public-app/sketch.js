@@ -11,6 +11,18 @@ let isTouched = false;
 let img1;
 let img2;
 let img12;
+let imgDia;
+let imgNoche;
+let imgCalor;
+let imgFrio;
+let imgDulce;
+let imgSalado;
+let imgMontaña;
+let imgPlaya;
+let imgPop;
+let imgRock;
+let imgGato;
+let imgPerro;
 
 //Pantalla inicio
 let screen;
@@ -145,6 +157,18 @@ function preload() {
   img1 = loadImage("appimages/Tutorial1.png");
   img2 = loadImage("appimages/Tutorial2.png");
   img12 = loadImage("appimages/cancionfinal.png");
+  imgCalor = loadImage("appimages/Calor.png");
+  imgDia = loadImage("appimages/Dia.png");
+  imgFrio = loadImage("appimages/Frio.png");
+  imgNoche = loadImage("appimages/Noche.png");
+  imgDulce = loadImage("appimages/Dulce.png");
+  imgSalado = loadImage("appimages/Salado.png");
+  imgGato = loadImage("appimages/Gato.png");
+  imgPerro = loadImage("appimages/Perro.png");
+  imgPlaya = loadImage("appimages/Playa.png");
+  imgMontaña = loadImage("appimages/Montaña.png");
+  imgPop = loadImage("appimages/Pop.png");
+  imgRock = loadImage("appimages/Rock.png");
   arialFontBold = loadFont("appimages/ArialBold.ttf");
 }
 
@@ -351,7 +375,18 @@ function draw() {
       break;
     case 8:
       socket.emit("send songs", userData);
-      image(img12, 0, 0, windowWidth, windowHeight);
+      image(imgCalor, 0, 0, windowWidth, windowHeight);
+      image(imgFrio, 0, 0, windowWidth, windowHeight);
+      image(imgDia, 0, 0, windowWidth, windowHeight);
+      image(imgNoche, 0, 0, windowWidth, windowHeight);
+      image(imgDulce, 0, 0, windowWidth, windowHeight);
+      image(imgSalado, 0, 0, windowWidth, windowHeight);
+      image(imgGato, 0, 0, windowWidth, windowHeight);
+      image(imgPerro, 0, 0, windowWidth, windowHeight);
+      image(imgPlaya, 0, 0, windowWidth, windowHeight);
+      image(imgMontaña, 0, 0, windowWidth, windowHeight);
+      image(imgPop, 0, 0, windowWidth, windowHeight);
+      image(imgRock, 0, 0, windowWidth, windowHeight);
       break;
     case 9:
       background(248, 117, 161);
@@ -406,11 +441,6 @@ function deviceMoved() {
         rotationX,
         rotationY,
       });
-
-      /*if (pmouseX > windowWidth || pmouseX < 0){
-                rotationX *= -1;
-            }*/
-      // background(0, 255, 0);
       break;
 
     case 3:
@@ -418,11 +448,6 @@ function deviceMoved() {
 }
 
 function deviceShaken() {
-  //socket.emit('mobile-instructions', 'Moved!');
-  //background(0, 255, 255);
-  /* if ((screen = 1)) {
-    screen = 2;
-  }*/
 }
 
 function windowResized() {
