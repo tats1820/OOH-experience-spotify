@@ -38,51 +38,51 @@ let puntaje = 0;
 let songPlaylist = [
   {
     tag: "Dulce",
-    song: "canciondulce",
+    song: cancionDulce,
   },
   {
     tag: "Salado",
-    song: "cancionsalado",
+    song: cancionSalado,
   },
   {
     tag: "Noche",
-    song: "cancionnoche",
+    song: cancionNoche,
   },
   {
     tag: "Día",
-    song: "canciondia",
+    song: cancionDia,
   },
   {
     tag: "Calor",
-    song: "cancioncalor",
+    song: cancionCalor,
   },
   {
     tag: "Frio",
-    song: "cancionfrio",
+    song: cancionFrio,
   },
   {
     tag: "Gato",
-    song: "canciongato",
+    song: cancionGato,
   },
   {
     tag: "Perro",
-    song: "cancionperro",
+    song: cancionPerro,
   },
   {
     tag: "Montaña",
-    song: "cancionmontaña",
+    song: cancionMontaña,
   },
   {
     tag: "Playa",
-    song: "cancionplaya",
+    song: cancionPlaya,
   },
   {
     tag: "Pop",
-    song: "cancionrock",
+    song: cancionPop,
   },
   {
     tag: "Rock",
-    song: "cancionrock",
+    song: cancionRock,
   },
 ];
 
