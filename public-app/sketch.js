@@ -10,7 +10,6 @@ let isTouched = false;
 //Imágenes
 let img1;
 let img2;
-let img12;
 let imgDia;
 let imgNoche;
 let imgCalor;
@@ -159,9 +158,10 @@ let newLead = {
   gmail: "",
   age: "",
 };
+
 let back0, back1, back2, back3, back4, back5, girl, boy;
+
 function preload() {
-  img12 = loadImage("appimages/cancionfinal.png");
   imgCalor = loadImage("appimages/Calor.png");
   imgDia = loadImage("appimages/Dia.png");
   imgFrio = loadImage("appimages/Frio.png");
@@ -176,18 +176,6 @@ function preload() {
   imgRock = loadImage("appimages/Rock.png");
   arialFontBold = loadFont("appimages/ArialBold.ttf");
 
-  cancionDulce = loadSound("songs/Dulce.mp3")
-  cancionSalado = loadSound("songs/Salado.mp3")
-  cancionNoche = loadSound("songs/Noche.mp3")
-  cancionDia = loadSound("songs/Dia.mp3")
-  cancionCalor = loadSound("songs/Calor.mp3")
-  cancionFrio = loadSound("songs/Frio.mp3")
-  cancionGato = loadSound("songs/Gato.mp3")
-  cancionPerro = loadSound("songs/Perro.mp3")
-  cancionMontaña = loadSound("songs/Montaña.mp3")
-  cancionPlaya = loadSound("songs/Playa.mp3")
-  cancionPop = loadSound("songs/Pop.mp3")
-  cancionRock = loadSound("songs/Rock.mp3")
   boy = loadImage("appimages/boy.png");
   girl = loadImage("appimages/girl.png");
   back0 = loadImage("appimages/back0.png");
@@ -197,6 +185,19 @@ function preload() {
   back4 = loadImage("appimages/back4.png");
   back5 = loadImage("appimages/back5.png");
   logo = loadImage("svgimages/logo.svg");
+
+  cancionDulce = loadSound("songs/Dulce.mp3");
+  cancionSalado = loadSound("songs/Salado.mp3");
+  cancionNoche = loadSound("songs/Noche.mp3");
+  cancionDia = loadSound("songs/Dia.mp3");
+  cancionCalor = loadSound("songs/Calor.mp3");
+  cancionFrio = loadSound("songs/Frio.mp3");
+  cancionGato = loadSound("songs/Gato.mp3");
+  cancionPerro = loadSound("songs/Perro.mp3");
+  cancionMontaña = loadSound("songs/Montaña.mp3");
+  cancionPlaya = loadSound("songs/Playa.mp3");
+  cancionPop = loadSound("songs/Pop.mp3");
+  cancionRock = loadSound("songs/Rock.mp3");
 }
 
 const postData = async (url = "", data = {}) => {
