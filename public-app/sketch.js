@@ -7,6 +7,9 @@ let controllerX,
 const interactions = 2;
 let isTouched = false;
 
+//Score
+let scoresong = 0;
+
 //Imágenes
 let img1;
 let img2;
@@ -381,19 +384,23 @@ function draw() {
       textOptions(5, 5);
       break;
     case 8:
+      background("#CDF564");
       socket.emit("send songs", userData);
-      image(imgCalor, 0, 0, windowWidth, windowHeight);
-      image(imgFrio, 0, 0, windowWidth, windowHeight);
-      image(imgDia, 0, 0, windowWidth, windowHeight);
-      image(imgNoche, 0, 0, windowWidth, windowHeight);
-      image(imgDulce, 0, 0, windowWidth, windowHeight);
-      image(imgSalado, 0, 0, windowWidth, windowHeight);
-      image(imgGato, 0, 0, windowWidth, windowHeight);
-      image(imgPerro, 0, 0, windowWidth, windowHeight);
-      image(imgPlaya, 0, 0, windowWidth, windowHeight);
-      image(imgMontaña, 0, 0, windowWidth, windowHeight);
-      image(imgPop, 0, 0, windowWidth, windowHeight);
+      if (scoresong === 120) {
       image(imgRock, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 60) {
+        image(imgPop, 0, 0, windowWidth, windowHeight); 
+        }  else if (scoresong === 80) {
+          image(imgGato, 0, 0, windowWidth, windowHeight); 
+          } else if (scoresong === 110) {
+            image(imgPerro, 0, 0, windowWidth, windowHeight); 
+            } else if (scoresong === 70) {
+              image(imgNoche, 0, 0, windowWidth, windowHeight); 
+              } 
+        
+        {
+
+      }
       break;
     case 9:
       background("#CDF564");
@@ -489,14 +496,17 @@ function mousePressed() {
   if (startQuestions) {
     if ((mouseX > 0) & (mouseX < windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.a);
+      scoresong += 10;
     }
     if ((mouseX < windowWidth) & (mouseX > windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.b);
+      scoresong += 20;
     }
     screen += 1;
     nextMupiScreen(screen);
     currentQuestion += 1;
     console.log(userData);
+    console.log(scoresong);
   }
 }
 
@@ -504,9 +514,11 @@ function touchStarted() {
   if (startQuestions) {
     if ((mouseX > 0) & (mouseX < windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.a);
+      scoresong += 10;
     }
     if ((mouseX < windowWidth) & (mouseX > windowWidth / 2)) {
       userData.push(questions[currentQuestion].choices.b);
+      scoresong += 20;
     }
     screen += 1;
     nextMupiScreen(screen);
@@ -518,3 +530,4 @@ function touchStarted() {
 function nextMupiScreen(screen) {
   socket.emit("nextMupiScreen", screen);
 }
+
