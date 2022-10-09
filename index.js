@@ -6,6 +6,29 @@ const SERVER_IP = "192.168.0.14"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
 const e = require("express");
 
+
+//Arduino
+/*const { SerialPort, ReadlineParser } = require('serialport');
+
+const {SerialPort, ReadlineParser} = require('serialport');
+const protocolConfiguration = {
+    path: '/COM5',
+    baudRate: 9600
+}
+const port = new SerialPort(protocolConfiguration);
+const parser = port.pipe(new ReadlineParser);
+
+port.on('data', (data)=> {
+    console.log(data);
+});
+
+parser.on('data', (data)=> {
+  console.log(data);
+});
+*/
+
+
+
 //const os = require('os');
 //const IPaddress = os.networkInterfaces().en0[1].address;
 //172.30.56.202
