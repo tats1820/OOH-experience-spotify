@@ -27,32 +27,21 @@ let deviceWidth,
   deviceHeight = 0;
 let mupiWidth,
   mupiHeight = 0;
+let mupibkg, qrcode;
 
 function preload() {
   //Mupi
-  img10 = loadImage("mupiimages/Fondomupi1.png");
-  img11 = loadImage("mupiimages/chicamupi.png");
-  img1 = loadImage("mupiimages/muppi2.png");
-  img13 = loadImage("mupiimages/qr-code.png");
-
-  //Tutorial
-  img8 = loadImage("mupiimages/Tutorialmupi1.png");
-  img9 = loadImage("mupiimages/instrucciones.png");
-
-  //Preguntas
-  img2 = loadImage("mupiimages/Pantallamupi1.png");
-  img3 = loadImage("mupiimages/Pantallamupi2.png");
-  img4 = loadImage("mupiimages/Pantallamupi3.png");
-  img5 = loadImage("mupiimages/Pantallamupi4.png");
-  img6 = loadImage("mupiimages/Pantallamupi5.png");
-  img7 = loadImage("mupiimages/Pantallamupi6.png");
-
+  mupibkg = loadImage("mupiimages/mupi1.png");
+  qrcode = loadImage("mupiimages/qr-code.png");
+  mupi2 = loadImage("mupiimages/mupi2.png");
+  mupi3 = loadImage("mupiimages/mupi3.png");
+  mupi4 = loadImage("mupiimages/mupi4.png");
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
 }
 
 function setup() {
   frameRate(60);
-  canvas = createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(865, 1275);
   canvas.style("z-index", "-1");
   canvas.style("position", "fixed");
   canvas.style("top", "0");
@@ -78,88 +67,115 @@ function draw() {
 
   switch (screen) {
     case 0:
-      image(img10, 0, 0, windowWidth, windowHeight);
-      image(
-        img11,
-        windowWidth / 3,
-        windowHeight / 13,
-        windowWidth / 3,
-        windowHeight
-      );
-      image(img13, windowWidth / 2.3, windowHeight / 2, 200, 200);
-      fill(255, 255, 255);
+      background("#BDE94B");
+      image(mupibkg, -50, -60);
+
+      image(qrcode, windowWidth / 6, windowHeight / 5 + 380, 200, 200);
+      fill("#191414");
       textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
+      textAlign(LEFT, TOP);
       text(
-        "Descubre la canción de tu vida aqui",
-        windowWidth / 2,
-        windowHeight / 5
+        "Descubre la canción de tu vida con Nostalgia",
+        windowWidth / 6,
+        windowHeight / 5,
+        606,
+        600
       );
       break;
 
     case 1:
-      image(img8, 0, 0, windowWidth, windowHeight);
-      image(img9, 400, 200, 700, 450);
-      fill(255, 255, 255);
-      textSize(60);
+      background("#BDE94B");
+      image(mupibkg, -50, -60);
+      fill("#191414");
+      textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
-      text("Oprime el lado de la respuesta", windowWidth / 2, windowHeight / 6);
+      textAlign(LEFT, CENTER);
+      text(
+        "¡Dale tap a la opción que más te guste!",
+        windowWidth / 6,
+        windowHeight / 5,
+        606,
+        600
+      );
       break;
 
     case 2:
-      image(img2, 0, 0, windowWidth, windowHeight);
-      fill(255, 255, 255);
-      textSize(100);
+      background("#91A0AD");
+      fill("#191414");
+      image(mupi2, 0, 0);
+      textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
-      text("¿Qué te gusta comer?", windowWidth / 2, windowHeight / 2);
+      textAlign(LEFT, CENTER);
+      text(
+        "¿Qué prefieres comer?",
+        windowWidth / 6,
+        windowHeight / 5,
+        600,
+        600
+      );
       break;
 
     case 3:
-      image(img3, 0, 0, windowWidth, windowHeight);
-      fill(255, 255, 255);
-      textSize(100);
+      background("#415F8A");
+      fill("#191414");
+      image(mupi3, 0, 0);
+      textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
-      text("¿Qué te gusta?", windowWidth / 2, windowHeight / 2);
+      textAlign(LEFT, CENTER);
+      text("¿Qué prefieres?", windowWidth / 6, windowHeight / 5, 600, 600);
       break;
 
     case 4:
-      image(img4, 0, 0, windowWidth, windowHeight);
-      fill(255, 255, 255);
-      textSize(100);
+      background("#91A0AD");
+      fill("#191414");
+      image(mupi4, 0, 0);
+      textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
-      text("¿Qué prefieres?", windowWidth / 2, windowHeight / 2);
+      textAlign(LEFT, CENTER);
+      text("¿Qué te gusta?", windowWidth / 6, windowHeight / 5, 600, 600);
       break;
 
     case 5:
-      image(img5, 0, 0, windowWidth, windowHeight);
-      fill(255, 255, 255);
-      textSize(100);
+      background("#91A0AD");
+      fill("#191414");
+      image(mupi2, 0, 0);
+      textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
-      text("Si fueras un animal...", windowWidth / 2, windowHeight / 2);
+      textAlign(LEFT, CENTER);
+      text(
+        "Si fueras un animal...",
+        windowWidth / 6,
+        windowHeight / 5,
+        600,
+        600
+      );
       break;
 
     case 6:
-      image(img6, 0, 0, windowWidth, windowHeight);
-      fill(255, 255, 255);
-      textSize(100);
+      background("#F5645C");
+      fill("#191414");
+      image(mupi2, 0, 0);
+      textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
-      text("Te gusta más", windowWidth / 2, windowHeight / 2);
+      textAlign(LEFT, CENTER);
+      text("Te gusta más...", windowWidth / 6, windowHeight / 5, 600, 600);
       break;
 
     case 7:
-      image(img7, 0, 0, windowWidth, windowHeight);
-      fill(255, 255, 255);
-      textSize(100);
+      background("#91A0AD");
+      fill("#191414");
+      image(mupi2, 0, 0);
+      textSize(70);
       textFont(arialFontBold);
-      textAlign(CENTER);
-      text("Te gusta escuchar", windowWidth / 2, windowHeight / 2);
+      textAlign(LEFT, CENTER);
+      text(
+        "Prefieres escuchar...",
+        windowWidth / 6,
+        windowHeight / 5,
+        600,
+        600
+      );
       break;
 
     case 8:
