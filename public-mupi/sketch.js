@@ -202,7 +202,25 @@ function newCursor(x, y) {
     fill(255);
     ellipse(x, y, 10, 10);*/
 }
-
+function sensorStarted() {
+  if (startQuestions) {
+    if ((arduinoMessage)) {
+      userData.push(questions[currentQuestion].choices.a);
+      scoresong += 10;
+    }
+    if () {
+      userData.push(questions[currentQuestion].choices.b);
+      scoresong += 20;
+    }
+    screen += 1;
+    nextMupiScreen(screen);
+    currentQuestion += 1;
+    console.log(userData);
+  }
+}
+function nextMupiScreen(screen) {
+  socket.emit("nextMupiScreen", screen);
+}
 socket.on("mupi-instructions", (instructions) => {
   console.log("ID: " + socket.id);
 
@@ -254,3 +272,14 @@ socket.on("listsongs", (listSongs) => {
 socket.on("nextMupiScreen", (s) => {
   screen = s;
 });
+
+socket.on('arduinoMessage', (arduinoMessage) => {
+  console.log('arduinoMessage: ')
+  console.log(arduinoMessage)
+
+  
+});
+
+socket.on('arduinoMessage', message => {
+  console.log(message);
+})

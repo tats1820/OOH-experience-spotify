@@ -1,43 +1,30 @@
 //pido la libreria
 const express = require("express");
 const { Server } = require("socket.io");
+const { SerialPort, ReadlineParser } = require("serialport");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "192.168.0.14"; // Cambiar por la IP del computador
+const SERVER_IP = "172.30.56.202"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
-const e = require("express");
+const { response } = require("express");
 
-
-//Arduino
-/*const { SerialPort, ReadlineParser } = require('serialport');
-
-const {SerialPort, ReadlineParser} = require('serialport');
-const protocolConfiguration = {
-    path: '/COM5',
-    baudRate: 9600
-}
-const port = new SerialPort(protocolConfiguration);
-const parser = port.pipe(new ReadlineParser);
-
-port.on('data', (data)=> {
-    console.log(data);
-});
-
-parser.on('data', (data)=> {
-  console.log(data);
-});
-*/
-
-
-
-//const os = require('os');
-//const IPaddress = os.networkInterfaces().en0[1].address;
-//172.30.56.202
-//creo la app
+//creo la app- http communication
 const app = express();
 app.use(express.json());
 //permite
 app.use("/app", express.static("public-app"));
 app.use("/mupi", express.static("public-mupi"));
+
+//serial communication
+const protocolConfiguration = {
+  path: "/COM3",
+  baudRate: 9600,
+};
+const port = new SerialPort(protocolConfiguration);
+const parser = port.pipe(new ReadlineParser());
+
+//const os = require('os');
+//const IPaddress = os.networkInterfaces().en0[1].address;
+//172.30.56.202
 //app.use(bodyParser.urlencoded({extended:false}))
 
 //esucho el puerto
@@ -49,6 +36,21 @@ const httpServer = app.listen(PORT, () => {
 // Run on terminal: ngrok http 5050;
 
 const io = new Server(httpServer, { path: "/real-time" });
+//serial communication working
+parser.on("data", (arduinoData) => {
+  let dataArray = arduinoData.split(" ");
+
+  let arduinoMessage = {
+    leftAction: dataArray[0],
+    rightAction: dataArray[1],
+    play: dataArray[2],
+  };
+  io.emit("arduinoMessage", arduinoMessage);
+
+  console.log(arduinoMessage);
+  io.broadcast.emit("mupi-instructions", instructions);
+});
+
 let validated = true; //validar de que este centrado
 let selectedRight = false;
 let selectedLeft = false;
@@ -110,8 +112,12 @@ let songPlaylist = [
 ];
 
 let respuestas = ["left", "right"];
-
+//websocket communication
 io.on("connection", (socket) => {
+  socket.broadcast.emit("arduinoMessage", arduinoMessage);
+  socket.on("orderForArduino", (orderForArduino) => {
+    console.log("point: " + orderForArduino);
+  });
   // para concetar
   console.log(socket.id);
 
@@ -145,7 +151,7 @@ io.on("connection", (socket) => {
 
   socket.on("mobile-instructions", (instructions) => {
     //console.log(instructions, validated);
-    
+
     socket.broadcast.emit("mupi-instructions", instructions);
   });
 });
@@ -154,4 +160,5 @@ io.on("connection", (socket) => {
 app.post(`/lead`, (req, res, next) => {
   console.log(req.body, "THE REQUEST");
   console.log("POST");
+  res.end();
 });

@@ -28,7 +28,7 @@ let imgPerro;
 
 //Canciones
 let cancionDulce;
-let cancionSalado
+let cancionSalado;
 let cancionNoche;
 let cancionDia;
 let cancionCalor;
@@ -387,19 +387,18 @@ function draw() {
       background("#CDF564");
       socket.emit("send songs", userData);
       if (scoresong === 120) {
-      image(imgRock, 0, 0, windowWidth, windowHeight);
+        image(imgRock, 0, 0, windowWidth, windowHeight);
       } else if (scoresong === 60) {
-        image(imgPop, 0, 0, windowWidth, windowHeight); 
-        }  else if (scoresong === 80) {
-          image(imgGato, 0, 0, windowWidth, windowHeight); 
-          } else if (scoresong === 110) {
-            image(imgPerro, 0, 0, windowWidth, windowHeight); 
-            } else if (scoresong === 70) {
-              image(imgNoche, 0, 0, windowWidth, windowHeight); 
-              } 
-        
-        {
+        image(imgPop, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 80) {
+        image(imgGato, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 110) {
+        image(imgPerro, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 70) {
+        image(imgNoche, 0, 0, windowWidth, windowHeight);
+      }
 
+      {
       }
       break;
     case 9:
@@ -449,7 +448,7 @@ function touchStarted() {
 function touchEnded() {
   isTouched = false;
 }
-
+/*
 function deviceMoved() {
   switch (interactions) {
     case 1:
@@ -473,24 +472,14 @@ function deviceMoved() {
   }
 }
 
-function deviceShaken() {
-}
-
+function deviceShaken() {}
+*/
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function newCursor(x, y) {
-  /*  noStroke();
-    fill(255);
-    ellipse(x, y, 10, 10);*/
-}
-/*
-socket.on("next question", (x) => {
-  screen += 1;
-  console.log(screen);
-});
-*/
+
+
 
 function mousePressed() {
   if (startQuestions) {
@@ -530,4 +519,3 @@ function touchStarted() {
 function nextMupiScreen(screen) {
   socket.emit("nextMupiScreen", screen);
 }
-
