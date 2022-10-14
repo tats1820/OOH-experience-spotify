@@ -18,6 +18,11 @@ let img9;
 let img10;
 let img11;
 
+let back0, back1, back2, back3, back4, back5, girl, boy;
+
+//Score
+let scoresong = 0;
+
 //Fuente
 let arialFontBold;
 
@@ -29,6 +34,69 @@ let mupiWidth,
   mupiHeight = 0;
 let mupibkg, qrcode;
 
+const questions = [
+  //Pregunta 1
+  {
+    question: "Te gusta comer",
+    choices: {
+      a: "Dulce",
+      b: "Salado",
+    },
+  },
+  //Pregunta 2
+  {
+    question: "¿Qué te gusta?",
+    choices: {
+      a: "Noche",
+      b: "Dia",
+    },
+  },
+  //Pregunta 3
+  {
+    question: "¿Qué prefieres?",
+    choices: {
+      a: "Calor",
+      b: "Frio",
+    },
+  },
+
+  //Pregunta 4
+  {
+    question: "Si fueras un animal",
+    choices: {
+      a: "Gato",
+      b: "Perro",
+    },
+  },
+
+  //Pregunta 5
+  {
+    question: "Te gusta más",
+    choices: {
+      a: "Montaña",
+      b: "Playa",
+    },
+  },
+
+  //Pregunta 6
+  {
+    question: "Te gusta escuchar",
+    choices: {
+      a: "Pop",
+      b: "Rock",
+    },
+  },
+
+  //Pregunta 7 NO ESTÁ EN LA PLATAFORMA - BONUS
+  {
+    question: "Te gusta más",
+    choices: {
+      a: "Frutas",
+      b: "Verduras",
+    },
+  },
+];
+
 function preload() {
   //Mupi
   mupibkg = loadImage("mupiimages/mupi1.png");
@@ -37,6 +105,16 @@ function preload() {
   mupi3 = loadImage("mupiimages/mupi3.png");
   mupi4 = loadImage("mupiimages/mupi4.png");
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
+
+  boy = loadImage("appimages/boy.png");
+  girl = loadImage("appimages/girl.png");
+  back0 = loadImage("appimages/back0.png");
+  back1 = loadImage("appimages/back1.png");
+  back2 = loadImage("appimages/back2.png");
+  back3 = loadImage("appimages/back3.png");
+  back4 = loadImage("appimages/back4.png");
+  back5 = loadImage("appimages/back5.png");
+  logo = loadImage("svgimages/logo.svg");
 }
 
 function setup() {
@@ -56,6 +134,29 @@ function setup() {
   image(img1, windowWidth / 2, windowHeight / 2, 550, 800);
   console.log(img1, img1.width / 2, img1.height / 2);
   */
+}
+
+function conicalGradient(colors) {
+  let gradient = drawingContext.createConicGradient(
+    PI / 2,
+    windowWidth / 2,
+    windowHeight / 3
+  );
+  gradient.addColorStop(0, colors[0]);
+  gradient.addColorStop(1, colors[1]);
+  drawingContext.fillStyle = gradient;
+}
+
+function textOptions(questionNumber) {
+  textAlign(CENTER, CENTER);
+  textSize(24);
+  textFont(arialFontBold);
+  text(questions[questionNumber].choices.a, windowWidth / 4, windowHeight / 2);
+  text(
+    questions[questionNumber].choices.b,
+    (windowWidth / 4) * 3,
+    windowHeight / 2
+  );
 }
 
 function draw() {
@@ -85,101 +186,88 @@ function draw() {
       break;
 
     case 1:
-      background("#BDE94B");
-      image(mupibkg, -50, -60);
-      fill("#191414");
-      textSize(70);
+      background("#CDF564");
+      image(back1, -60, -80);
+      textAlign(LEFT, TOP);
+      textSize(32);
       textFont(arialFontBold);
-      textAlign(LEFT, CENTER);
-      text(
-        "¡Dale tap a la opción que más te guste!",
-        windowWidth / 6,
-        windowHeight / 5,
-        606,
-        600
-      );
+      text("¡Dale tap a la opción que más te guste!", 50, 200, 238, 354);
+      image(girl, windowWidth / 8, windowHeight / 3);
+      image(logo, windowWidth / 8, windowHeight / 1.1);
       break;
 
     case 2:
-      background("#91A0AD");
-      fill("#191414");
-      image(mupi2, 0, 0);
-      textSize(70);
-      textFont(arialFontBold);
-      textAlign(LEFT, CENTER);
-      text(
-        "¿Qué prefieres comer?",
-        windowWidth / 6,
-        windowHeight / 5,
-        600,
-        600
+      conicalGradient(
+        [color(205, 245, 100), color(84, 73, 245)],
+        rect(0, 0, windowWidth, windowHeight)
       );
+      image(back3, -60, -50);
+      textOptions(0, 0);
+
       break;
 
     case 3:
-      background("#415F8A");
-      fill("#191414");
-      image(mupi3, 0, 0);
-      textSize(70);
-      textFont(arialFontBold);
-      textAlign(LEFT, CENTER);
-      text("¿Qué prefieres?", windowWidth / 6, windowHeight / 5, 600, 600);
+      conicalGradient(
+        [color(245, 137, 224), color(244, 87, 47)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back2, -60, -50);
+      textOptions(1, 1);
+
       break;
 
     case 4:
-      background("#91A0AD");
-      fill("#191414");
-      image(mupi4, 0, 0);
-      textSize(70);
-      textFont(arialFontBold);
-      textAlign(LEFT, CENTER);
-      text("¿Qué te gusta?", windowWidth / 6, windowHeight / 5, 600, 600);
+      conicalGradient(
+        [color(39, 51, 125), color(144, 230, 174)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back4, -60, -50);
+      textOptions(2, 2);
       break;
 
     case 5:
-      background("#91A0AD");
-      fill("#191414");
-      image(mupi2, 0, 0);
-      textSize(70);
-      textFont(arialFontBold);
-      textAlign(LEFT, CENTER);
-      text(
-        "Si fueras un animal...",
-        windowWidth / 6,
-        windowHeight / 5,
-        600,
-        600
+      conicalGradient(
+        [color(205, 245, 100), color(112, 83, 120)],
+        rect(0, 0, windowWidth, windowHeight)
       );
+      image(back3, -50, -50);
+      textOptions(3, 3);
       break;
 
     case 6:
-      background("#F5645C");
-      fill("#191414");
-      image(mupi2, 0, 0);
-      textSize(70);
-      textFont(arialFontBold);
-      textAlign(LEFT, CENTER);
-      text("Te gusta más...", windowWidth / 6, windowHeight / 5, 600, 600);
+      conicalGradient(
+        [color(255, 188, 75), color(237, 24, 161)],
+        rect(0, 0, windowWidth, windowHeight)
+      );
+      image(back2, -60, -50);
+      textOptions(4, 4);
       break;
 
     case 7:
-      background("#91A0AD");
-      fill("#191414");
-      image(mupi2, 0, 0);
-      textSize(70);
-      textFont(arialFontBold);
-      textAlign(LEFT, CENTER);
-      text(
-        "Prefieres escuchar...",
-        windowWidth / 6,
-        windowHeight / 5,
-        600,
-        600
+      conicalGradient(
+        [color(244, 87, 47), color(112, 83, 120)],
+        rect(0, 0, windowWidth, windowHeight)
       );
+      image(back4, -60, -50);
+      textOptions(5, 5);
       break;
 
     case 8:
-      //image(img8, 0, 0, windowWidth, windowHeight);
+      background("#CDF564");
+      if (scoresong === 120) {
+      image(imgRock, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 60) {
+        image(imgPop, 0, 0, windowWidth, windowHeight); 
+        }  else if (scoresong === 80) {
+          image(imgGato, 0, 0, windowWidth, windowHeight); 
+          } else if (scoresong === 110) {
+            image(imgPerro, 0, 0, windowWidth, windowHeight); 
+            } else if (scoresong === 70) {
+              image(imgNoche, 0, 0, windowWidth, windowHeight); 
+              } 
+        
+        {
+      }
       break;
 
     default:
