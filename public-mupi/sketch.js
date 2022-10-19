@@ -99,7 +99,7 @@ const questions = [
 
 function preload() {
   //Mupi
-  mupibkg = loadImage("mupiimages/mupi1.png");
+  mupibkg = loadImage("./mupiimages/mupi1.png");
   qrcode = loadImage("mupiimages/qr-code.png");
   mupi2 = loadImage("mupiimages/mupi2.png");
   mupi3 = loadImage("mupiimages/mupi3.png");
@@ -255,18 +255,18 @@ function draw() {
     case 8:
       background("#CDF564");
       if (scoresong === 120) {
-      image(imgRock, 0, 0, windowWidth, windowHeight);
+        image(imgRock, 0, 0, windowWidth, windowHeight);
       } else if (scoresong === 60) {
-        image(imgPop, 0, 0, windowWidth, windowHeight); 
-        }  else if (scoresong === 80) {
-          image(imgGato, 0, 0, windowWidth, windowHeight); 
-          } else if (scoresong === 110) {
-            image(imgPerro, 0, 0, windowWidth, windowHeight); 
-            } else if (scoresong === 70) {
-              image(imgNoche, 0, 0, windowWidth, windowHeight); 
-              } 
-        
-        {
+        image(imgPop, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 80) {
+        image(imgGato, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 110) {
+        image(imgPerro, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 70) {
+        image(imgNoche, 0, 0, windowWidth, windowHeight);
+      }
+
+      {
       }
       break;
 
@@ -292,7 +292,7 @@ function newCursor(x, y) {
 }
 function sensorStarted() {
   if (startQuestions) {
-    if ((arduinoMessage)) {
+    if (arduinoMessage) {
       userData.push(questions[currentQuestion].choices.a);
       scoresong += 10;
     }
@@ -357,17 +357,23 @@ socket.on("listsongs", (listSongs) => {
   console.log(listSongs);
 });
 
-socket.on("nextMupiScreen", (s) => {
-  screen = s;
+socket.on("nextMupiScreen", () => {
+  screen += 1;
 });
 
-socket.on('arduinoMessage', (arduinoMessage) => {
-  console.log('arduinoMessage: ')
-  console.log(arduinoMessage)
-
-  
+socket.on("arduinoMessage", (arduinoMessage) => {
+  console.log("arduinoMessage: ");
+  console.log(arduinoMessage);
 });
-
-socket.on('arduinoMessage', message => {
+socket.on("selectedLeft", () => {
+  console.log(screen);
+  alert(questions[screen - 2].choices.a);
+  screen += 1;
+});
+socket.on("selectedRight", () => {
+  alert(questions[screen - 2].choices.b);
+  screen += 1;
+});
+socket.on("arduinoMessage", (message) => {
   console.log(message);
-})
+});
