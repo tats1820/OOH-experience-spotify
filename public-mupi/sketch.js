@@ -37,62 +37,89 @@ let mupibkg, qrcode;
 const questions = [
   //Pregunta 1
   {
-    question: "Te gusta comer",
+    question: "Me siento mas comodo con un estilo retro",
     choices: {
-      a: "Dulce",
-      b: "Salado",
+      a: "Si",
+      b: "No",
     },
   },
   //Pregunta 2
   {
-    question: "¿Qué te gusta?",
+    question: "¿La musica del antes?",
     choices: {
-      a: "Noche",
-      b: "Dia",
+      a: "Me relaja",
+      b: "Me estresa",
     },
   },
   //Pregunta 3
   {
-    question: "¿Qué prefieres?",
+    question: "Me siento identificada/o con: No queremos estar en el 2022, queremos estar en una epoca diferente donde no existio la pandemia",
     choices: {
-      a: "Calor",
-      b: "Frio",
+      a: "Si",
+      b: "No",
     },
   },
 
   //Pregunta 4
   {
-    question: "Si fueras un animal",
+    question: "Me siento mas feliz cuando escucho:",
     choices: {
-      a: "Gato",
-      b: "Perro",
+      a: "Gasolina",
+      b: "Despecha",
     },
   },
 
   //Pregunta 5
   {
-    question: "Te gusta más",
+    question: "¿La musica Retro me da energia?",
     choices: {
-      a: "Montaña",
-      b: "Playa",
+      a: "Si",
+      b: "No",
     },
   },
 
   //Pregunta 6
   {
-    question: "Te gusta escuchar",
+    question: "¿La musica Aesthetic me da paz mental?",
     choices: {
-      a: "Pop",
-      b: "Rock",
+      a: "Si",
+      b: "No",
     },
   },
 
   //Pregunta 7 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
-    question: "Te gusta más",
+    question: "¿Me siento comodo/a con la musica de Andres Calamaro?",
     choices: {
-      a: "Frutas",
-      b: "Verduras",
+      a: "Si",
+      b: "No",
+    },
+  },
+
+  //Pregunta 8 NO ESTÁ EN LA PLATAFORMA - BONUS
+  {
+    question: "Paradise de Coldplay me hace sentir",
+    choices: {
+      a: "Feliz",
+      b: "Triste",
+    },
+  },
+
+  //Pregunta 9 NO ESTÁ EN LA PLATAFORMA - BONUS
+  {
+    question: "Si te mostramos una playlist llamada RETROCEDAMOS EN EL TIEMPO, ¿la escucharias?",
+    choices: {
+      a: "Si",
+      b: "No",
+    },
+  },
+
+  //Pregunta 10 NO ESTÁ EN LA PLATAFORMA - BONUS
+  {
+    question: "La musica me lleva a momentos concretos de mi vida",
+    choices: {
+      a: "Si",
+      b: "No",
     },
   },
 ];
