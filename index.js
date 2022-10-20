@@ -111,6 +111,7 @@ parser.on("data", (arduinoData) => {
 
   if ((arduinoMessage.play = "y" && screens <= 1)) {
     screens += 1;
+
     io.emit("nextMupiScreen");
     console.log("sensor activado");
   }
