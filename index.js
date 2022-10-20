@@ -3,7 +3,7 @@ const express = require("express");
 const { Server } = require("socket.io");
 const { SerialPort, ReadlineParser } = require("serialport");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "192.168.0.15"; // Cambiar por la IP del computador
+const SERVER_IP = "192.168.20.23"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
 const { response } = require("express");
 
@@ -37,19 +37,6 @@ const httpServer = app.listen(PORT, () => {
 
 const io = new Server(httpServer, { path: "/real-time" });
 //serial communication working
-parser.on("data", (arduinoData) => {
-  let dataArray = arduinoData.split(" ");
-
-  let arduinoMessage = {
-    leftAction: dataArray[0],
-    rightAction: dataArray[1],
-    play: dataArray[2],
-  };
-  io.emit("arduinoMessage", arduinoMessage);
-
-  console.log(arduinoMessage);
-  io.broadcast.emit("mupi-instructions", instructions);
-});
 
 let validated = true; //validar de que este centrado
 let selectedRight = false;
@@ -110,11 +97,47 @@ let songPlaylist = [
     song: "Linkin park - In the end",
   },
 ];
-
+let screens = 0;
 let respuestas = ["left", "right"];
 //websocket communication
+parser.on("data", (arduinoData) => {
+  let dataArray = arduinoData.split(" ");
+
+  let arduinoMessage = {
+    leftAction: dataArray[0],
+    rightAction: dataArray[1],
+    play: dataArray[2],
+  };
+
+  if ((arduinoMessage.play = "y" && screens <= 1)) {
+    screens += 1;
+
+    io.emit("nextMupiScreen");
+    console.log("sensor activado");
+  }
+  if (arduinoMessage.leftAction != 0 && selectedLeft == false && screens > 1) {
+    screens += 1;
+    selectedLeft = true;
+    io.emit("selectedLeft");
+    console.log("sensor activado");
+    selectedLeft = false;
+  }
+  if (
+    arduinoMessage.rightAction != 0 &&
+    selectedRight == false &&
+    screens > 1
+  ) {
+    screens += 1;
+    selectedRight = true;
+    io.emit("selectedRight");
+    console.log("sensor activado");
+    selectedRight = false;
+  }
+  console.log(arduinoMessage);
+});
+
 io.on("connection", (socket) => {
-  socket.broadcast.emit("arduinoMessage", arduinoMessage);
+  // socket.broadcast.emit("arduinoMessage", arduinoMessage);
   socket.on("orderForArduino", (orderForArduino) => {
     console.log("point: " + orderForArduino);
   });
@@ -125,7 +148,12 @@ io.on("connection", (socket) => {
     //tamaño del celular, lo escucho
     socket.broadcast.emit("mupi-size", deviceSize);
   });
-
+  /*
+  if (selectedLeft) {
+    selectedLeft = false;
+    socket.emit("nextMupiScreen", screens);
+    console.log("mensaje enviado");
+  }*/
   socket.on("nextMupiScreen", (screen) => {
     console.log(screen);
     socket.broadcast.emit("nextMupiScreen", screen);

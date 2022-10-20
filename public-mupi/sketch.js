@@ -1,3 +1,5 @@
+//const { text } = require("body-parser");
+
 const NGROK = `https://${window.location.hostname}`;
 let socket = io(NGROK, { path: "/real-time" });
 console.log("Server IP: ", NGROK);
@@ -37,7 +39,7 @@ let mupibkg, qrcode;
 const questions = [
   //Pregunta 1
   {
-    question: "Me siento mas comodo con un estilo retro",
+    question: "Me siento mas cómodx con un estilo retro",
     choices: {
       a: "Si",
       b: "No",
@@ -45,7 +47,7 @@ const questions = [
   },
   //Pregunta 2
   {
-    question: "¿La musica del antes?",
+    question: "La musica de antes...",
     choices: {
       a: "Me relaja",
       b: "Me estresa",
@@ -53,7 +55,8 @@ const questions = [
   },
   //Pregunta 3
   {
-    question: "Me siento identificada/o con: No queremos estar en el 2022, queremos estar en una epoca diferente donde no existio la pandemia",
+    question:
+      "Me siento identificadx con: No quiero estar en el 2022, quiero estar en una época diferente donde no existió la pandemia",
     choices: {
       a: "Si",
       b: "No",
@@ -62,7 +65,7 @@ const questions = [
 
   //Pregunta 4
   {
-    question: "Me siento mas feliz cuando escucho:",
+    question: "Me siento más feliz cuando escucho:",
     choices: {
       a: "Gasolina",
       b: "Despecha",
@@ -89,7 +92,7 @@ const questions = [
 
   //Pregunta 7 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
-    question: "¿Me siento comodo/a con la musica de Andres Calamaro?",
+    question: "¿Me siento cómodx con la música de Andres Calamaro?",
     choices: {
       a: "Si",
       b: "No",
@@ -98,7 +101,7 @@ const questions = [
 
   //Pregunta 8 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
-    question: "Paradise de Coldplay me hace sentir",
+    question: "Paradise de Coldplay me hace sentir...",
     choices: {
       a: "Feliz",
       b: "Triste",
@@ -107,7 +110,8 @@ const questions = [
 
   //Pregunta 9 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
-    question: "Si te mostramos una playlist llamada RETROCEDAMOS EN EL TIEMPO, ¿la escucharias?",
+    question:
+      "Si te mostramos una playlist llamada RETROCEDAMOS EN EL TIEMPO, ¿la escucharias?",
     choices: {
       a: "Si",
       b: "No",
@@ -126,22 +130,16 @@ const questions = [
 
 function preload() {
   //Mupi
-  mupibkg = loadImage("mupiimages/mupi1.png");
+
   qrcode = loadImage("mupiimages/qr-code.png");
-  mupi2 = loadImage("mupiimages/mupi2.png");
-  mupi3 = loadImage("mupiimages/mupi3.png");
-  mupi4 = loadImage("mupiimages/mupi4.png");
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
 
-  boy = loadImage("appimages/boy.png");
-  girl = loadImage("appimages/girl.png");
-  back0 = loadImage("appimages/back0.png");
-  back1 = loadImage("appimages/back1.png");
-  back2 = loadImage("appimages/back2.png");
-  back3 = loadImage("appimages/back3.png");
-  back4 = loadImage("appimages/back4.png");
-  back5 = loadImage("appimages/back5.png");
-  logo = loadImage("svgimages/logo.svg");
+  back0 = loadImage("mupiimages/muppi0.png");
+  back1 = loadImage("mupiimages/muppi1.png");
+  back2 = loadImage("mupiimages/muppi2.png");
+  back3 = loadImage("mupiimages/muppi3.png");
+  back4 = loadImage("mupiimages/muppi4.png");
+  back5 = loadImage("mupiimages/muppi5.png");
 }
 
 function setup() {
@@ -155,7 +153,7 @@ function setup() {
   controllerY = windowHeight / 2;
   mupiWidth = windowWidth;
   mupiHeight = windowHeight;
-  background(0);
+  // background(0);
 
   /*imageMode("center");
   image(img1, windowWidth / 2, windowHeight / 2, 550, 800);
@@ -178,6 +176,7 @@ function textOptions(questionNumber) {
   textAlign(CENTER, CENTER);
   textSize(24);
   textFont(arialFontBold);
+  text(questions[questionNumber].question, windowWidth / 4, windowHeight / 8);
   text(questions[questionNumber].choices.a, windowWidth / 4, windowHeight / 2);
   text(
     questions[questionNumber].choices.b,
@@ -196,40 +195,57 @@ function draw() {
   switch (screen) {
     case 0:
       background("#BDE94B");
-      image(mupibkg, -50, -60);
-
-      image(qrcode, windowWidth / 6, windowHeight / 5 + 380, 200, 200);
+      image(back0, 0, 0);
       fill("#191414");
       textSize(70);
       textFont(arialFontBold);
       textAlign(LEFT, TOP);
+      textLeading(65);
       text(
-        "Descubre la canción de tu vida con Nostalgia",
+        "Descubre la canción de tu vida con NOSTALGIA",
         windowWidth / 6,
         windowHeight / 5,
         606,
         600
       );
+      textSize(30);
+      textAlign(CENTER, CENTER);
+      textLeading(30);
+      text("Presiona el botón para iniciar", windowWidth / 3, 580, 300, 600);
       break;
 
     case 1:
       background("#CDF564");
-      image(back1, -60, -80);
+      image(back1, 0, 0);
       textAlign(LEFT, TOP);
-      textSize(32);
+      textSize(65);
       textFont(arialFontBold);
-      text("¡Dale tap a la opción que más te guste!", 50, 200, 238, 354);
-      image(girl, windowWidth / 8, windowHeight / 3);
-      image(logo, windowWidth / 8, windowHeight / 1.1);
+      textLeading(65);
+      text(
+        "Párate al frente de los sensores para elegir la opción que más te guste",
+        windowWidth / 6,
+        windowHeight / 5,
+        606,
+        1200
+      );
+      textSize(22);
+      textLeading(20);
+      text("Sensor izquierdo", 184, 760, 94, 48);
+      text("Sensor derecho", 557, 588, 87, 48);
+
       break;
 
     case 2:
-      conicalGradient(
+      const colorA = conicalGradient(
         [color(205, 245, 100), color(84, 73, 245)],
         rect(0, 0, windowWidth, windowHeight)
       );
-      image(back3, -60, -50);
-      textOptions(0, 0);
+      background(colorA);
+      image(back2, 0, 0);
+
+      //fill("#191414");
+
+      textOptions(0, 0).fillStyle("#191414");
 
       break;
 
@@ -238,8 +254,8 @@ function draw() {
         [color(245, 137, 224), color(244, 87, 47)],
         rect(0, 0, windowWidth, windowHeight)
       );
-      image(back2, -60, -50);
-      textOptions(1, 1);
+      image(back3, 0, 0);
+      textOptions(1);
 
       break;
 
@@ -257,7 +273,7 @@ function draw() {
         [color(205, 245, 100), color(112, 83, 120)],
         rect(0, 0, windowWidth, windowHeight)
       );
-      image(back3, -50, -50);
+      image(back3, 0, 0);
       textOptions(3, 3);
       break;
 
@@ -266,7 +282,7 @@ function draw() {
         [color(255, 188, 75), color(237, 24, 161)],
         rect(0, 0, windowWidth, windowHeight)
       );
-      image(back2, -60, -50);
+      image(back2, 0, 0);
       textOptions(4, 4);
       break;
 
@@ -275,26 +291,28 @@ function draw() {
         [color(244, 87, 47), color(112, 83, 120)],
         rect(0, 0, windowWidth, windowHeight)
       );
-      image(back4, -60, -50);
+      image(back4, 0, 0);
       textOptions(5, 5);
       break;
 
     case 8:
       background("#CDF564");
       if (scoresong === 120) {
-      image(imgRock, 0, 0, windowWidth, windowHeight);
+        image(imgRock, 0, 0, windowWidth, windowHeight);
       } else if (scoresong === 60) {
-        image(imgPop, 0, 0, windowWidth, windowHeight); 
-        }  else if (scoresong === 80) {
-          image(imgGato, 0, 0, windowWidth, windowHeight); 
-          } else if (scoresong === 110) {
-            image(imgPerro, 0, 0, windowWidth, windowHeight); 
-            } else if (scoresong === 70) {
-              image(imgNoche, 0, 0, windowWidth, windowHeight); 
-              } 
-        
-        {
+        image(imgPop, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 80) {
+        image(imgGato, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 110) {
+        image(imgPerro, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong === 70) {
+        image(imgNoche, 0, 0, windowWidth, windowHeight);
       }
+
+      {
+      }
+      break;
+    case 9:
       break;
 
     default:
@@ -319,7 +337,7 @@ function newCursor(x, y) {
 }
 function sensorStarted() {
   if (startQuestions) {
-    if ((arduinoMessage)) {
+    if (arduinoMessage) {
       userData.push(questions[currentQuestion].choices.a);
       scoresong += 10;
     }
@@ -384,17 +402,23 @@ socket.on("listsongs", (listSongs) => {
   console.log(listSongs);
 });
 
-socket.on("nextMupiScreen", (s) => {
-  screen = s;
+socket.on("nextMupiScreen", () => {
+  screen += 1;
 });
 
-socket.on('arduinoMessage', (arduinoMessage) => {
-  console.log('arduinoMessage: ')
-  console.log(arduinoMessage)
-
-  
+socket.on("arduinoMessage", (arduinoMessage) => {
+  console.log("arduinoMessage: ");
+  console.log(arduinoMessage);
 });
-
-socket.on('arduinoMessage', message => {
+socket.on("selectedLeft", () => {
+  console.log(screen);
+  alert(questions[screen - 2].choices.a);
+  screen += 1;
+});
+socket.on("selectedRight", () => {
+  alert(questions[screen - 2].choices.b);
+  screen += 1;
+});
+socket.on("arduinoMessage", (message) => {
   console.log(message);
-})
+});
