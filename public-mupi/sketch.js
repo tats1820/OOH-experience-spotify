@@ -3,7 +3,7 @@ let socket = io(NGROK, { path: "/real-time" });
 console.log("Server IP: ", NGROK);
 
 //Pantalla
-let screen = 2;
+let screen = 9;
 
 let timeInit = Date.now();
 console.log(timeInit, "----------------------------");
@@ -24,7 +24,7 @@ let deviceWidth,
   deviceHeight = 0;
 let mupiWidth,
   mupiHeight = 0;
-//let mupibkg, qrcode;
+let mupibkg, qrcode;
 
 const questions = [
   //Pregunta 1
@@ -98,20 +98,12 @@ const questions = [
     },
   },
 
-  //Pregunta 9 NO ESTÁ EN LA PLATAFORMA - BONUS
-  {
-    question: "La musica me lleva a momentos concretos de mi vida",
-    choices: {
-      a: "Si",
-      b: "No",
-    },
-  },
 ];
 
 function preload() {
   //Mupi
 
-  //qrcode = loadImage("mupiimages/qr-code.png");
+  qrcode = loadImage("mupiimages/qr-code.png");
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
 
   back0 = loadImage("mupiimages/muppi0.png");
@@ -292,7 +284,30 @@ function draw() {
       }
       break;
     case 9:
-      background(0);
+      background("#BDE94B");
+
+      image(qrcode, 200, 400);
+      fill("#191414");
+      textSize(60);
+      textFont(arialFontBold);
+      textAlign(LEFT, TOP);
+      textLeading(65);
+      text(
+        "Escanea el QR",
+        windowWidth / 6,
+        windowHeight / 5,
+        606,
+        600
+      );
+      textSize(50);
+      textFont(arialFontBold);
+      text(
+        "¡Llena tus datos y recibiras muchas sorpresas!",
+        windowWidth / 10,
+        windowHeight / 4,
+        606,
+        600
+      );
       break;
 
     default:
