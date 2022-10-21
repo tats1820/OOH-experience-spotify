@@ -153,12 +153,7 @@ function setup() {
   controllerY = windowHeight / 2;
   mupiWidth = windowWidth;
   mupiHeight = windowHeight;
-  // background(0);
 
-  /*imageMode("center");
-  image(img1, windowWidth / 2, windowHeight / 2, 550, 800);
-  console.log(img1, img1.width / 2, img1.height / 2);
-  */
 }
 
 function conicalGradient(colors) {
@@ -186,11 +181,6 @@ function textOptions(questionNumber) {
 }
 
 function draw() {
-  /*background(0, 5);
-    newCursor(pmouseX, pmouseY);
-    fill(255);
-    ellipse(controllerX, controllerY, ballSize, ballSize);
-    */
 
   switch (screen) {
     case 0:
