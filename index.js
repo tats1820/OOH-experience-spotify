@@ -20,12 +20,8 @@ const protocolConfiguration = {
   baudRate: 9600,
 };
 const port = new SerialPort(protocolConfiguration);
-const parser = port.pipe(new ReadlineParser());
+const parser = port.pipe(new ReadlineParser());//Para traducir la informacion que manda el arduino
 
-//const os = require('os');
-//const IPaddress = os.networkInterfaces().en0[1].address;
-//172.30.56.202
-//app.use(bodyParser.urlencoded({extended:false}))
 
 //esucho el puerto
 const httpServer = app.listen(PORT, () => {
