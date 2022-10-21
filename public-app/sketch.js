@@ -69,6 +69,14 @@ function instructionsButtonAction() {
   instructionsButton.hide();
 }
 
+function finalScreen(){
+  screen = 10;
+  saveUserdataButton.hide();
+  imputNickname.hide();
+  imputGmail.hide();
+  imputUserDataButton.hide();
+}
+
 function saveUserData() {
   postData(NGROK + "/lead", newLead).then((data) => {
     console.log(data, "THE DATA");
@@ -165,42 +173,13 @@ let newLead = {
 let back0, back1, back2, back3, back4, back5, girl, boy;
 
 function preload() {
-  imgCalor = loadImage("appimages/Calor.png");
-  imgDia = loadImage("appimages/Dia.png");
-  imgFrio = loadImage("appimages/Frio.png");
-  imgNoche = loadImage("appimages/Noche.png");
-  imgDulce = loadImage("appimages/Dulce.png");
-  imgSalado = loadImage("appimages/Salado.png");
-  imgGato = loadImage("appimages/Gato.png");
-  imgPerro = loadImage("appimages/Perro.png");
-  imgPlaya = loadImage("appimages/Playa.png");
-  imgMontaña = loadImage("appimages/Montaña.png");
-  imgPop = loadImage("appimages/Pop.png");
-  imgRock = loadImage("appimages/Rock.png");
-  arialFontBold = loadFont("appimages/ArialBold.ttf");
+  
+  arialFontBold = loadFont("svgimages/ArialBold.ttf");
 
-  boy = loadImage("appimages/boy.png");
-  girl = loadImage("appimages/girl.png");
-  back0 = loadImage("appimages/back0.png");
-  back1 = loadImage("appimages/back1.png");
-  back2 = loadImage("appimages/back2.png");
-  back3 = loadImage("appimages/back3.png");
-  back4 = loadImage("appimages/back4.png");
-  back5 = loadImage("appimages/back5.png");
+  
   logo = loadImage("svgimages/logo.svg");
 
-  cancionDulce = loadSound("songs/Dulce.mp3");
-  cancionSalado = loadSound("songs/Salado.mp3");
-  cancionNoche = loadSound("songs/Noche.mp3");
-  cancionDia = loadSound("songs/Dia.mp3");
-  cancionCalor = loadSound("songs/Calor.mp3");
-  cancionFrio = loadSound("songs/Frio.mp3");
-  cancionGato = loadSound("songs/Gato.mp3");
-  cancionPerro = loadSound("songs/Perro.mp3");
-  cancionMontaña = loadSound("songs/Montaña.mp3");
-  cancionPlaya = loadSound("songs/Playa.mp3");
-  cancionPop = loadSound("songs/Pop.mp3");
-  cancionRock = loadSound("songs/Rock.mp3");
+
 }
 
 const postData = async (url = "", data = {}) => {
@@ -215,14 +194,10 @@ const postData = async (url = "", data = {}) => {
   return data;
 };
 
-function startGameAction() {
-  screen = 1;
-  startGameButton.hide();
-  console.log("a");
-}
+
 
 function setup() {
-  screen = 0;
+  screen = 9;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.style("position", "fixed");
@@ -236,12 +211,7 @@ function setup() {
 
   socket.emit("device-size", { windowWidth, windowHeight });
 
-  startGameButton = createButton('<i class="material-icons">play_arrow</i>');
-  startGameButton.center();
-  startGameButton.position(windowWidth / 2.5, windowHeight / 2);
-  startGameButton.child('<i class="material-icons">cloud</i>');
-  startGameButton.addClass("btn");
-  startGameButton.mousePressed(startGameButtonAction);
+
 
   saveUserDataButton = createButton(
     '<i class="material-icons">check_circle</i>'
@@ -251,6 +221,7 @@ function setup() {
   saveUserDataButton.addClass("btn");
 
   saveUserDataButton.mousePressed(saveUserData);
+  saveUserDataButton.mousePressed(finalScreen);
   saveUserDataButton.style("display", "none");
   inputNickname = createInput("", "text");
   inputNickname.attribute("placeholder", "Nickname");
@@ -403,17 +374,8 @@ function draw() {
       break;
     case 9:
       background("#CDF564");
-      image(back5, -80, -20);
-      textAlign(LEFT, TOP);
-      textSize(24);
-      textFont(arialFontBold);
-      text(
-        "¡Comparte tu canción en tus redes sociales y recibe un mes gratis de Spotify!",
-        50,
-        windowHeight / 11,
-        238,
-        354
-      );
+      
+      
 
       inputNickname.style("display", "block");
       inputGmail.style("display", "block");
@@ -422,6 +384,19 @@ function draw() {
       image(logo, windowWidth / 8, windowHeight / 1.1);
       break;
 
+    case 10:
+      background("#CDF564");
+      textAlign(CENTER, CENTER);
+      textSize(24);
+      textFont(arialFontBold);
+      text(
+          "¡Tus datos se han registrado correctamente!",
+          50,
+          windowHeight / 11,
+          238,
+          354
+        );
+        break;
     default:
       background(29, 185, 84);
       break;
