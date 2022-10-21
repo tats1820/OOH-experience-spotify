@@ -1,13 +1,9 @@
-//const { text } = require("body-parser");
-
-const { text } = require("body-parser");
-
 const NGROK = `https://${window.location.hostname}`;
 let socket = io(NGROK, { path: "/real-time" });
 console.log("Server IP: ", NGROK);
 
 //Pantalla
-let screen = 0;
+let screen = 2;
 
 let timeInit = Date.now();
 console.log(timeInit, "----------------------------");
@@ -33,7 +29,7 @@ let mupiWidth,
 const questions = [
   //Pregunta 1
   {
-    question: "Me siento mas cómodx con un estilo retro",
+    question: "La musica me lleva a momentos concretos de mi vida",
     choices: {
       a: "Si",
       b: "No",
@@ -49,11 +45,10 @@ const questions = [
   },
   //Pregunta 3
   {
-    question:
-      "Me siento identificadx con: No quiero estar en el 2022, quiero estar en una época diferente donde no existió la pandemia",
+    question: "Paradise de Coldplay me hace sentir...",
     choices: {
-      a: "Si",
-      b: "No",
+      a: "Feliz",
+      b: "Triste",
     },
   },
 
@@ -95,24 +90,15 @@ const questions = [
 
   //Pregunta 8 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
-    question: "Paradise de Coldplay me hace sentir...",
-    choices: {
-      a: "Feliz",
-      b: "Triste",
-    },
-  },
-
-  //Pregunta 9 NO ESTÁ EN LA PLATAFORMA - BONUS
-  {
     question:
-      "Si te mostramos una playlist llamada RETROCEDAMOS EN EL TIEMPO, ¿la escucharias?",
+      "¿Escucharias la playlist RETROCEDAMOS EN EL TIEMPO?",
     choices: {
       a: "Si",
       b: "No",
     },
   },
 
-  //Pregunta 10 NO ESTÁ EN LA PLATAFORMA - BONUS
+  //Pregunta 9 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
     question: "La musica me lleva a momentos concretos de mi vida",
     choices: {
@@ -175,9 +161,9 @@ function conicalGradient(colors) {
 function textOptions(questionNumber) {
   //fill(0, 255, 0);
   textAlign(CENTER, CENTER);
-  textSize(24);
+  textSize(30);
   textFont(arialFontBold);
-  text(questions[questionNumber].question, windowWidth / 4, windowHeight / 8);
+  text(questions[questionNumber].question, windowWidth / 2, windowHeight / 8);
   text(questions[questionNumber].choices.a, windowWidth / 4, windowHeight / 2);
   text(questions[questionNumber].choices.b,(windowWidth / 4) * 3,windowHeight / 2
   );
@@ -233,12 +219,11 @@ function draw() {
       //push();
       background(230, 30, 23);
       conicalGradient([color(0, 137, 224), color(244, 0, 47)]);
-      image(back2, 0, 0);
       fill("#191414");
+      image(back2, 0, 0);
       textOptions(0, 0);
+      textAlign(CENTER, TOP);
       
-
-      //.fillStyle("#191414");
       break;
 
     case 3:
