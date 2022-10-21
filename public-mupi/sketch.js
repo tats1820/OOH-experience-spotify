@@ -16,11 +16,13 @@ let img6;
 let img7;
 let img8;
 let img9;
+let timeInit = Date.now();
+console.log(timeInit, "----------------------------");
 
 let img10;
 let img11;
-
-let back0, back1, back2, back3, back4, back5, girl, boy;
+let imgRock, imgPop, imgGato, imgPerro, imgNoche;
+let back0, back1, back2, back3, back4, back5;
 
 //Score
 let scoresong = 0;
@@ -140,9 +142,15 @@ function preload() {
   back3 = loadImage("mupiimages/muppi3.png");
   back4 = loadImage("mupiimages/muppi4.png");
   back5 = loadImage("mupiimages/muppi5.png");
-}
 
+  imgRock = loadImage("mupiimages/Rock.png");
+  imgPop = loadImage("mupiimages/POP.png");
+  imgPerro = loadImage("mupiimages/Perro.png");
+  imgNoche = loadImage("mupiimages/Noche.png");
+}
+// imgPop, imgGato, imgPerro,imgNoche
 function setup() {
+  //noFill();
   frameRate(60);
   canvas = createCanvas(865, 1275);
   canvas.style("z-index", "-1");
@@ -153,6 +161,7 @@ function setup() {
   controllerY = windowHeight / 2;
   mupiWidth = windowWidth;
   mupiHeight = windowHeight;
+
   // background(0);
 
   /*imageMode("center");
@@ -167,12 +176,16 @@ function conicalGradient(colors) {
     windowWidth / 2,
     windowHeight / 3
   );
-  gradient.addColorStop(0, colors[0]);
-  gradient.addColorStop(1, colors[1]);
+  gradient.addColorStop(0, colors[0] || color(0, 255, 255));
+  gradient.addColorStop(1, colors[1] || color(255, 0, 255));
   drawingContext.fillStyle = gradient;
+
+  // fill(255, 0, 0);
+  rect(0, 0, windowWidth, windowHeight);
 }
 
 function textOptions(questionNumber) {
+  //fill(0, 255, 0);
   textAlign(CENTER, CENTER);
   textSize(24);
   textFont(arialFontBold);
@@ -195,6 +208,7 @@ function draw() {
   switch (screen) {
     case 0:
       background("#BDE94B");
+
       image(back0, 0, 0);
       fill("#191414");
       textSize(70);
@@ -236,83 +250,83 @@ function draw() {
       break;
 
     case 2:
-      const colorA = conicalGradient(
-        [color(205, 245, 100), color(84, 73, 245)],
-        rect(0, 0, windowWidth, windowHeight)
-      );
-      background(colorA);
+      //push();
+      background(230, 30, 23);
+      conicalGradient([color(0, 137, 224), color(244, 0, 47)]);
       image(back2, 0, 0);
+      fill("#191414");
+      textOptions(0, 0);
 
-      //fill("#191414");
-
-      textOptions(0, 0).fillStyle("#191414");
-
+      //.fillStyle("#191414");
       break;
 
     case 3:
-      conicalGradient(
-        [color(245, 137, 224), color(244, 87, 47)],
-        rect(0, 0, windowWidth, windowHeight)
-      );
+      background(230, 30, 23);
+      conicalGradient([color(245, 137, 224), color(244, 87, 47)]);
+      fill("#191414");
       image(back3, 0, 0);
-      textOptions(1);
+      textOptions(1, 1);
 
       break;
 
     case 4:
-      conicalGradient(
-        [color(39, 51, 125), color(144, 230, 174)],
-        rect(0, 0, windowWidth, windowHeight)
-      );
-      image(back4, -60, -50);
+      background(230, 30, 23);
+      conicalGradient([color(39, 51, 125), color(144, 230, 174)]);
+      fill("#191414");
+      image(back4, 0, 0);
       textOptions(2, 2);
       break;
 
     case 5:
-      conicalGradient(
-        [color(205, 245, 100), color(112, 83, 120)],
-        rect(0, 0, windowWidth, windowHeight)
-      );
+      background(230, 30, 23);
+      conicalGradient([color((205, 245, 100), color(112, 83, 120))]);
+      fill("#191414");
       image(back3, 0, 0);
       textOptions(3, 3);
       break;
 
     case 6:
-      conicalGradient(
-        [color(255, 188, 75), color(237, 24, 161)],
-        rect(0, 0, windowWidth, windowHeight)
-      );
+      background(230, 30, 23);
+      conicalGradient([color((255, 188, 75), color(237, 24, 161))]);
+      fill("#191414");
       image(back2, 0, 0);
       textOptions(4, 4);
       break;
 
     case 7:
-      conicalGradient(
-        [color(244, 87, 47), color(112, 83, 120)],
-        rect(0, 0, windowWidth, windowHeight)
-      );
+      background(230, 30, 23);
+      conicalGradient([color((244, 87, 4), color(112, 83, 120))]);
+      fill("#191414");
       image(back4, 0, 0);
       textOptions(5, 5);
       break;
 
     case 8:
       background("#CDF564");
-      if (scoresong === 120) {
-        image(imgRock, 0, 0, windowWidth, windowHeight);
-      } else if (scoresong === 60) {
+      //console.log(scoresong, 'SCORE');
+      let counterTime = Date.now();
+      if (scoresong >= 31 && scoresong <= 49) {
+        image(imgRock, 0, 0, imgRock.windowWidth, windowHeight);
+      } else if (scoresong >= 50 && scoresong <= 69) {
         image(imgPop, 0, 0, windowWidth, windowHeight);
-      } else if (scoresong === 80) {
+      } else if (scoresong >= 10 && scoresong <= 30) {
         image(imgGato, 0, 0, windowWidth, windowHeight);
-      } else if (scoresong === 110) {
+      } else if (scoresong >= 70 && scoresong <= 150) {
         image(imgPerro, 0, 0, windowWidth, windowHeight);
-      } else if (scoresong === 70) {
+      } else if (scoresong >= 70 && scoresong <= 80) {
         image(imgNoche, 0, 0, windowWidth, windowHeight);
       }
-
-      {
+      if (timeInit + 5 * 1000 <= counterTime) {
+        console.log("HOLAAAA------", {
+          ti: timeInit,
+          tim: timeInit + 5 * 1000,
+        });
+        screen = 9;
+        console.log(screen, "SCREEN");
       }
       break;
     case 9:
+      background(0);
       break;
 
     default:
@@ -335,6 +349,7 @@ function newCursor(x, y) {
     fill(255);
     ellipse(x, y, 10, 10);*/
 }
+/*
 function sensorStarted() {
   if (startQuestions) {
     if (arduinoMessage) {
@@ -344,13 +359,13 @@ function sensorStarted() {
     /*if () {
       userData.push(questions[currentQuestion].choices.b);
       scoresong += 20;
-    }*/
+    }
     screen += 1;
     nextMupiScreen(screen);
     currentQuestion += 1;
     console.log(userData);
   }
-}
+}*/
 function nextMupiScreen(screen) {
   socket.emit("nextMupiScreen", screen);
 }
@@ -413,11 +428,23 @@ socket.on("arduinoMessage", (arduinoMessage) => {
 socket.on("selectedLeft", () => {
   console.log(screen);
   alert(questions[screen - 2].choices.a);
+  scoresong += 10;
+  console.log(scoresong);
   screen += 1;
+  if (screen >= 8) {
+    timeInit = Date.now();
+    console.log("-----------", timeInit);
+  }
 });
 socket.on("selectedRight", () => {
   alert(questions[screen - 2].choices.b);
+  scoresong += 20;
+  console.log(scoresong);
   screen += 1;
+  if (screen >= 8) {
+    timeInit = Date.now();
+    console.log("-----------", timeInit);
+  }
 });
 socket.on("arduinoMessage", (message) => {
   console.log(message);
