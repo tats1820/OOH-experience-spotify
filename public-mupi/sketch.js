@@ -1,26 +1,18 @@
 //const { text } = require("body-parser");
 
+const { text } = require("body-parser");
+
 const NGROK = `https://${window.location.hostname}`;
 let socket = io(NGROK, { path: "/real-time" });
 console.log("Server IP: ", NGROK);
 
 //Pantalla
 let screen = 0;
-//Imágenes
-let img1;
-let img2; //Pantalla 1
-let img3;
-let img4;
-let img5;
-let img6;
-let img7;
-let img8;
-let img9;
+
 let timeInit = Date.now();
 console.log(timeInit, "----------------------------");
 
-let img10;
-let img11;
+
 let imgRock, imgPop, imgGato, imgPerro, imgNoche;
 let back0, back1, back2, back3, back4, back5;
 
@@ -36,7 +28,7 @@ let deviceWidth,
   deviceHeight = 0;
 let mupiWidth,
   mupiHeight = 0;
-let mupibkg, qrcode;
+//let mupibkg, qrcode;
 
 const questions = [
   //Pregunta 1
@@ -133,7 +125,7 @@ const questions = [
 function preload() {
   //Mupi
 
-  qrcode = loadImage("mupiimages/qr-code.png");
+  //qrcode = loadImage("mupiimages/qr-code.png");
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
 
   back0 = loadImage("mupiimages/muppi0.png");
@@ -144,11 +136,12 @@ function preload() {
   back5 = loadImage("mupiimages/muppi5.png");
 
   imgRock = loadImage("mupiimages/Rock.png");
-  imgPop = loadImage("mupiimages/POP.png");
+  imgPop = loadImage("mupiimages/Dia.png");
   imgPerro = loadImage("mupiimages/Perro.png");
   imgNoche = loadImage("mupiimages/Noche.png");
+  imgGato = loadImage("mupiimages/Gato.png");
+  imgGato = loadImage("mupiimages/POP.png");
 }
-// imgPop, imgGato, imgPerro,imgNoche
 function setup() {
   //noFill();
   frameRate(60);
@@ -186,10 +179,7 @@ function textOptions(questionNumber) {
   textFont(arialFontBold);
   text(questions[questionNumber].question, windowWidth / 4, windowHeight / 8);
   text(questions[questionNumber].choices.a, windowWidth / 4, windowHeight / 2);
-  text(
-    questions[questionNumber].choices.b,
-    (windowWidth / 4) * 3,
-    windowHeight / 2
+  text(questions[questionNumber].choices.b,(windowWidth / 4) * 3,windowHeight / 2
   );
 }
 
@@ -226,7 +216,7 @@ function draw() {
       textFont(arialFontBold);
       textLeading(65);
       text(
-        "Párate al frente de los sensores para elegir la opción que más te guste",
+        "Estira la mano al sensor que quieras elegir para responder la pregunta",
         windowWidth / 6,
         windowHeight / 5,
         606,
@@ -246,6 +236,7 @@ function draw() {
       image(back2, 0, 0);
       fill("#191414");
       textOptions(0, 0);
+      
 
       //.fillStyle("#191414");
       break;

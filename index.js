@@ -3,7 +3,7 @@ const express = require("express");
 const { Server } = require("socket.io");
 const { SerialPort, ReadlineParser } = require("serialport");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "192.168.20.23"; // Cambiar por la IP del computador
+const SERVER_IP = "10.60.32.123"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
 const { response } = require("express");
 
@@ -99,6 +99,7 @@ let songPlaylist = [
 ];
 let screens = 0;
 let respuestas = ["left", "right"];
+
 //websocket communication
 parser.on("data", (arduinoData) => {
   let dataArray = arduinoData.split(" ");
