@@ -3,9 +3,9 @@ const express = require("express");
 const { Server } = require("socket.io");
 const { SerialPort, ReadlineParser } = require("serialport");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "192.168.0.15"; // Cambiar por la IP del computador
-const bodyParser = require("body-parser");
-const { response } = require("express");
+const SERVER_IP = "192.1681.0.15"; // Cambiar por la IP del computador
+//const bodyParser = require("body-parser");
+//const { response } = require("express");
 
 //creo la app- http communication
 const app = express();

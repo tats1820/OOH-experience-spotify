@@ -197,7 +197,7 @@ const postData = async (url = "", data = {}) => {
 
 
 function setup() {
-  screen = 9;
+  screen = 0;
   frameRate(60);
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.style("position", "fixed");
