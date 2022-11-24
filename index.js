@@ -1,9 +1,10 @@
 //pido la libreria
-const express = require("express");
-const { Server } = require("socket.io");
+const express = require("express"); //protocolo http
+const { Server } = require("socket.io"); //webscokets
+
 const { SerialPort, ReadlineParser } = require("serialport");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "192.168.0.15"; // Cambiar por la IP del computador
+const SERVER_IP = "172.30.56.202"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
 const { response } = require("express");
 
@@ -20,8 +21,7 @@ const protocolConfiguration = {
   baudRate: 9600,
 };
 const port = new SerialPort(protocolConfiguration);
-const parser = port.pipe(new ReadlineParser());//Para traducir la informacion que manda el arduino
-
+const parser = port.pipe(new ReadlineParser()); //Para traducir la informacion que manda el arduino
 
 //esucho el puerto
 const httpServer = app.listen(PORT, () => {
@@ -135,9 +135,7 @@ parser.on("data", (arduinoData) => {
 
 io.on("connection", (socket) => {
   // socket.broadcast.emit("arduinoMessage", arduinoMessage);
-  socket.on("orderForArduino", (orderForArduino) => {
-    console.log("point: " + orderForArduino);
-  });
+
   // para concetar
   console.log(socket.id);
 
@@ -160,20 +158,6 @@ io.on("connection", (socket) => {
     console.log(screen);
   });
 
-  socket.on("send songs", (userData) => {
-    console.log(userData);
-    let listSongs = [];
-    userData.forEach((answer) => {
-      songPlaylist.forEach((ti) => {
-        if (ti.tag == answer) {
-          listSongs.push(ti.song);
-        }
-      });
-    });
-    console.log(listSongs);
-    socket.broadcast.emit("listsongs", listSongs);
-  });
-
   socket.on("mobile-instructions", (instructions) => {
     //console.log(instructions, validated);
 
@@ -181,7 +165,7 @@ io.on("connection", (socket) => {
   });
 });
 
-//app.post(`http://${SERVER_IP}:${PORT}/app`, (req, res, next) => {
+//guardar datos de los lead a través de un post
 app.post(`/lead`, (req, res, next) => {
   console.log(req.body, "THE REQUEST");
   console.log("POST");
