@@ -4,7 +4,7 @@ const { Server } = require("socket.io"); //webscokets
 
 const { SerialPort, ReadlineParser } = require("serialport");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
-const SERVER_IP = "172.30.56.202"; // Cambiar por la IP del computador
+const SERVER_IP = "192.168.20.23"; // Cambiar por la IP del computador
 const bodyParser = require("body-parser");
 const { response } = require("express");
 
