@@ -1,7 +1,12 @@
 //pido la libreria
 const express = require("express"); //protocolo http
 const { Server } = require("socket.io"); //webscokets
+const cors = require("cors");
+const { FireStoreDB } = require("./firebase-config.js"); //llamo librería de firestore
 
+const leadsCollection = new FireStoreDB("Leads");
+const interactionCollection = new FireStoreDB("Interactions");
+//const leadsCollection = new FireStoreDB("Leads");
 const { SerialPort, ReadlineParser } = require("serialport");
 const PORT = 5050; // No cambiar, es el puerto, ngrok y este puerto deben ser iguales
 const SERVER_IP = "192.168.20.23"; // Cambiar por la IP del computador
@@ -10,6 +15,7 @@ const { response } = require("express");
 
 //creo la app- http communication
 const app = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 //permite
 app.use("/app", express.static("public-app"));
@@ -166,8 +172,46 @@ io.on("connection", (socket) => {
 });
 
 //guardar datos de los lead a través de un post
+/*
 app.post(`/lead`, (req, res, next) => {
   console.log(req.body, "THE REQUEST");
   console.log("POST");
   res.end();
 });
+*/
+
+app.get("/Leads", (request, response) => {
+  timeStamp();
+  interactionCollection.getCollection().then((leads) => {
+    console.log(leads);
+    response.send(leads);
+  });
+});
+
+app.post("/add-new-lead", (request, response) => {
+  timeStamp();
+  console.log("Before timeStamp: ");
+  console.log(request.body);
+  console.log("After timeStamp: ");
+  request.body.timestamp = timeStamp();
+  console.log(request.body);
+  //agrega doc en firestore
+  interactionCollection.addNewDocument(request.body);
+  response.status(200).end();
+});
+
+function timeStamp() {
+  let date = new Date();
+  let [month, day, year] = [
+    date.getMonth() + 1,
+    date.getDate(),
+    date.getFullYear(),
+  ];
+  let [hour, minutes, seconds] = [
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
+  ];
+  console.log(`${hour}:${minutes}:${seconds} - ${month}/${day}/${year}`);
+  return `${hour}:${minutes}:${seconds} - ${month}/${day}/${year}`;
+}

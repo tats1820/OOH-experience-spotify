@@ -5,6 +5,11 @@ console.log("Server IP: ", NGROK);
 //Pantalla
 let screen = 0;
 
+let lead = {
+  name: "La Tertulia",
+  reason: "New interaction",
+};
+
 let timeInit = Date.now();
 console.log(timeInit, "----------------------------");
 
@@ -100,7 +105,7 @@ const questions = [
 function preload() {
   //Mupi
 
-  qrcode = loadImage("mupiimages/qr-code.png");
+  qrcode = loadImage("mupiimages/qrform.png");
   arialFontBold = loadFont("mupiimages/ArialBold.ttf");
 
   back0 = loadImage("mupiimages/muppi0.png");
@@ -242,7 +247,7 @@ function draw() {
 
     case 6:
       background(230, 30, 23);
-      conicalGradient([color((255, 188, 75), color(189,233,75))]);
+      conicalGradient([color((255, 188, 75), color(189, 233, 75))]);
       fill("#191414");
       image(back2, 0, 0);
       textOptions(4, 4);
@@ -254,36 +259,13 @@ function draw() {
       fill("#191414");
       image(back4, 0, 0);
       textOptions(5, 5);
+
       break;
 
     case 8:
-      background("#CDF564");
-      //console.log(scoresong, 'SCORE');
-      let counterTime = Date.now();
-      if (scoresong >= 31 && scoresong <= 49) {
-        image(imgRock, 0, 0, imgRock.windowWidth, windowHeight);
-      } else if (scoresong >= 50 && scoresong <= 69) {
-        image(imgPop, 0, 0, windowWidth, windowHeight);
-      } else if (scoresong >= 10 && scoresong <= 30) {
-        image(imgGato, 0, 0, windowWidth, windowHeight);
-      } else if (scoresong >= 70 && scoresong <= 150) {
-        image(imgPerro, 0, 0, windowWidth, windowHeight);
-      } else if (scoresong >= 70 && scoresong <= 80) {
-        image(imgNoche, 0, 0, windowWidth, windowHeight);
-      }
-      if (timeInit + 5 * 1000 <= counterTime) {
-        console.log("HOLAAAA------", {
-          ti: timeInit,
-          tim: timeInit + 5 * 1000,
-        });
-        screen = 9;
-        console.log(screen, "SCREEN");
-      }
-      break;
-    case 9:
       background("#BDE94B");
       image(back5, 0, 0);
-      image(qrcode, windowWidth / 6, 500);
+      image(qrcode, 20, 500);
       fill("#191414");
       textSize(40);
       textLeading(5);
@@ -299,6 +281,30 @@ function draw() {
       );
       textSize(50);
       textFont(arialFontBold);
+
+      if (timeInit + 5 * 1000 <= counterTime) {
+        console.log("HOLAAAA------", {
+          ti: timeInit,
+          tim: timeInit + 5 * 1000,
+        });
+        screen = 9;
+        console.log(screen, "SCREEN");
+      }
+      break;
+    case 9:
+      background("#CDF564");
+      //console.log(scoresong, 'SCORE');
+      if (scoresong >= 31 && scoresong <= 49) {
+        image(imgRock, 0, 0, imgRock.windowWidth, windowHeight);
+      } else if (scoresong >= 50 && scoresong <= 69) {
+        image(imgPop, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong >= 10 && scoresong <= 30) {
+        image(imgGato, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong >= 70 && scoresong <= 150) {
+        image(imgPerro, 0, 0, windowWidth, windowHeight);
+      } else if (scoresong >= 70 && scoresong <= 80) {
+        image(imgNoche, 0, 0, windowWidth, windowHeight);
+      }
       break;
 
     default:
@@ -391,6 +397,9 @@ socket.on("listsongs", (listSongs) => {
 
 socket.on("nextMupiScreen", () => {
   screen += 1;
+  if (screen == 1) {
+    sendInstallationInfo(lead);
+  }
 });
 
 socket.on("arduinoMessage", (arduinoMessage) => {
@@ -421,3 +430,14 @@ socket.on("selectedRight", () => {
 socket.on("arduinoMessage", (message) => {
   console.log(message);
 });
+
+async function sendInstallationInfo(lead) {
+  const request = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(lead),
+  };
+  await fetch("http://localhost:5050/add-new-lead", request);
+}

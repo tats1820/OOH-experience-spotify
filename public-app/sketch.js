@@ -69,8 +69,6 @@ function instructionsButtonAction() {
   instructionsButton.hide();
 }
 
-
-
 function saveUserData() {
   postData(NGROK + "/lead", newLead).then((data) => {
     console.log(data, "THE DATA");
@@ -207,7 +205,7 @@ function setup() {
   saveUserDataButton.addClass("btn");
   saveUserDataButton.mousePressed(saveUserData);
   saveUserDataButton.style("display", "none");
-  
+
   inputNickname = createInput("", "text");
   inputNickname.attribute("placeholder", "Nickname");
   inputNickname.position(windowWidth / 4, windowHeight / 2.9);
