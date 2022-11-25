@@ -69,13 +69,7 @@ function instructionsButtonAction() {
   instructionsButton.hide();
 }
 
-function finalScreen(){
-  screen = 10;
-  saveUserdataButton.hide();
-  imputNickname.hide();
-  imputGmail.hide();
-  imputUserDataButton.hide();
-}
+
 
 function saveUserData() {
   postData(NGROK + "/lead", newLead).then((data) => {
@@ -173,13 +167,9 @@ let newLead = {
 let back0, back1, back2, back3, back4, back5, girl, boy;
 
 function preload() {
-  
   arialFontBold = loadFont("svgimages/ArialBold.ttf");
 
-  
   logo = loadImage("svgimages/logo.svg");
-
-
 }
 
 const postData = async (url = "", data = {}) => {
@@ -193,8 +183,6 @@ const postData = async (url = "", data = {}) => {
   });
   return data;
 };
-
-
 
 function setup() {
   screen = 0;
@@ -211,18 +199,15 @@ function setup() {
 
   socket.emit("device-size", { windowWidth, windowHeight });
 
-
-
   saveUserDataButton = createButton(
     '<i class="material-icons">check_circle</i>'
   );
   saveUserDataButton.position(windowWidth / 2.5, windowHeight / 1.5);
   saveUserDataButton.child('<i class="material-icons">cloud</i>');
   saveUserDataButton.addClass("btn");
-
   saveUserDataButton.mousePressed(saveUserData);
-  saveUserDataButton.mousePressed(finalScreen);
   saveUserDataButton.style("display", "none");
+  
   inputNickname = createInput("", "text");
   inputNickname.attribute("placeholder", "Nickname");
   inputNickname.position(windowWidth / 4, windowHeight / 2.9);
@@ -374,8 +359,6 @@ function draw() {
       break;
     case 9:
       background("#CDF564");
-      
-      
 
       inputNickname.style("display", "block");
       inputGmail.style("display", "block");
@@ -384,19 +367,6 @@ function draw() {
       image(logo, windowWidth / 8, windowHeight / 1.1);
       break;
 
-    case 10:
-      background("#CDF564");
-      textAlign(CENTER, CENTER);
-      textSize(24);
-      textFont(arialFontBold);
-      text(
-          "¡Tus datos se han registrado correctamente!",
-          50,
-          windowHeight / 11,
-          238,
-          354
-        );
-        break;
     default:
       background(29, 185, 84);
       break;
@@ -452,9 +422,6 @@ function deviceShaken() {}
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
-
-
-
 
 function mousePressed() {
   if (startQuestions) {

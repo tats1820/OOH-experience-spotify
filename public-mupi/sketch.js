@@ -3,11 +3,10 @@ let socket = io(NGROK, { path: "/real-time" });
 console.log("Server IP: ", NGROK);
 
 //Pantalla
-let screen = 9;
+let screen = 0;
 
 let timeInit = Date.now();
 console.log(timeInit, "----------------------------");
-
 
 let imgRock, imgPop, imgGato, imgPerro, imgNoche;
 let back0, back1, back2, back3, back4, back5;
@@ -90,14 +89,12 @@ const questions = [
 
   //Pregunta 8 NO ESTÁ EN LA PLATAFORMA - BONUS
   {
-    question:
-      "¿Escucharias la playlist RETROCEDAMOS EN EL TIEMPO?",
+    question: "¿Escucharias la playlist RETROCEDAMOS EN EL TIEMPO?",
     choices: {
       a: "Si",
       b: "No",
     },
   },
-
 ];
 
 function preload() {
@@ -132,8 +129,6 @@ function setup() {
   controllerY = windowHeight / 2;
   mupiWidth = windowWidth;
   mupiHeight = windowHeight;
-
-
 }
 
 function conicalGradient(colors) {
@@ -157,12 +152,14 @@ function textOptions(questionNumber) {
   textFont(arialFontBold);
   text(questions[questionNumber].question, windowWidth / 2, windowHeight / 8);
   text(questions[questionNumber].choices.a, windowWidth / 4, windowHeight / 2);
-  text(questions[questionNumber].choices.b,(windowWidth / 4) * 3,windowHeight / 2
+  text(
+    questions[questionNumber].choices.b,
+    (windowWidth / 4) * 3,
+    windowHeight / 2
   );
 }
 
 function draw() {
-
   switch (screen) {
     case 0:
       background("#BDE94B");
@@ -215,7 +212,7 @@ function draw() {
       image(back2, 0, 0);
       textOptions(0, 0);
       textAlign(CENTER, TOP);
-      
+
       break;
 
     case 3:
@@ -229,7 +226,7 @@ function draw() {
 
     case 4:
       background(230, 30, 23);
-      conicalGradient([color(39, 51, 125), color(144, 230, 174)]);
+      conicalGradient([color(188, 163, 205), color(144, 230, 174)]);
       fill("#191414");
       image(back4, 0, 0);
       textOptions(2, 2);
@@ -245,7 +242,7 @@ function draw() {
 
     case 6:
       background(230, 30, 23);
-      conicalGradient([color((255, 188, 75), color(237, 24, 161))]);
+      conicalGradient([color((255, 188, 75), color(189,233,75))]);
       fill("#191414");
       image(back2, 0, 0);
       textOptions(4, 4);
@@ -253,7 +250,7 @@ function draw() {
 
     case 7:
       background(230, 30, 23);
-      conicalGradient([color((244, 87, 4), color(112, 83, 120))]);
+      conicalGradient([color((255, 90, 152), color(255, 90, 152))]);
       fill("#191414");
       image(back4, 0, 0);
       textOptions(5, 5);
@@ -285,15 +282,16 @@ function draw() {
       break;
     case 9:
       background("#BDE94B");
-
-      image(qrcode, 200, 400);
+      image(back5, 0, 0);
+      image(qrcode, windowWidth / 6, 500);
       fill("#191414");
-      textSize(60);
+      textSize(40);
+      textLeading(5);
       textFont(arialFontBold);
       textAlign(LEFT, TOP);
       textLeading(65);
       text(
-        "Escanea el QR",
+        "Escanea el código QR para recibir un mes gratuito de Spotify y recibir más recomendaciones de tu estilo",
         windowWidth / 6,
         windowHeight / 5,
         606,
@@ -301,13 +299,6 @@ function draw() {
       );
       textSize(50);
       textFont(arialFontBold);
-      text(
-        "¡Llena tus datos y recibiras muchas sorpresas!",
-        windowWidth / 10,
-        windowHeight / 4,
-        606,
-        600
-      );
       break;
 
     default:
